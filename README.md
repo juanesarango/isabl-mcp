@@ -39,12 +39,36 @@ cd mcp-server && pip install -e .
 
 See [mcp-server/README.md](mcp-server/README.md) for setup and available tools.
 
+## Knowledge Base
+
+The `knowledge/` package builds a hierarchical knowledge tree from Isabl's documentation sources (GitHub repos, Gitbook docs) for agent-consumable retrieval.
+
+```bash
+cd knowledge && uv sync
+source ../.env
+uv run isabl-knowledge build        # extract → summarize → tree → publish
+uv run isabl-knowledge serve         # start MCP server with tree tools
+```
+
+### LLM Configuration
+
+The summarizer and tree builder require an LLM. Configure via environment variables in `.env`:
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `LLM_BASE_URL` | Gateway URL (e.g. Portkey, Galileo) | Anthropic API |
+| `LLM_API_KEY` | API key for the gateway | `ANTHROPIC_API_KEY` |
+| `LLM_MODEL` | Model identifier (e.g. `@bedrock/claude-opus-4-6`) | `claude-sonnet-4-20250514` |
+
+Copy `.env.example` to `.env` and fill in your values. The `.env` file is gitignored.
+
 ## Repository Structure
 
 ```
 isabl-skills/
 ├── skills/          # 8 Claude Code skills
 ├── mcp-server/      # MCP server (9 tools)
+├── knowledge/       # Knowledge tree pipeline
 ├── scripts/         # Install script
 └── dev/             # Development notes & reference docs
 ```

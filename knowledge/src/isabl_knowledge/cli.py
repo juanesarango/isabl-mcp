@@ -6,6 +6,7 @@ from pathlib import Path
 import click
 
 from isabl_knowledge.config import load_config
+from isabl_knowledge.llm import get_default_model
 
 
 @click.group()
@@ -49,7 +50,7 @@ def extract(ctx, output_dir: Path):
 
 @cli.command()
 @click.option("--data-dir", "-d", default="data", type=click.Path(path_type=Path))
-@click.option("--model", "-m", default="claude-sonnet-4-20250514")
+@click.option("--model", "-m", default=None)
 @click.pass_context
 def summarize(ctx, data_dir: Path, model: str):
     """Generate LLM summaries for extracted documents."""
@@ -63,7 +64,8 @@ def summarize(ctx, data_dir: Path, model: str):
 
     raw = json.loads(docs_file.read_text())
     docs = [Document(**d) for d in raw]
-    click.echo(f"Summarizing {len(docs)} documents with {model}...")
+    effective_model = model or get_default_model()
+    click.echo(f"Summarizing {len(docs)} documents with {effective_model}...")
 
     summarized = summarize_documents(docs, model=model)
 
@@ -74,7 +76,7 @@ def summarize(ctx, data_dir: Path, model: str):
 @cli.command()
 @click.option("--data-dir", "-d", default="data", type=click.Path(path_type=Path))
 @click.option("--output-dir", "-o", default="output", type=click.Path(path_type=Path))
-@click.option("--model", "-m", default="claude-sonnet-4-20250514")
+@click.option("--model", "-m", default=None)
 @click.pass_context
 def tree(ctx, data_dir: Path, output_dir: Path, model: str):
     """Build the knowledge tree from summaries."""
@@ -88,7 +90,8 @@ def tree(ctx, data_dir: Path, output_dir: Path, model: str):
 
     raw = json.loads(docs_file.read_text())
     docs = [Document(**d) for d in raw]
-    click.echo(f"Building tree from {len(docs)} documents with {model}...")
+    effective_model = model or get_default_model()
+    click.echo(f"Building tree from {len(docs)} documents with {effective_model}...")
 
     tree_node = build_tree(docs, model=model)
 
@@ -132,7 +135,7 @@ def publish(ctx, data_dir: Path, output_dir: Path):
 @cli.command()
 @click.option("--data-dir", "-d", default="data", type=click.Path(path_type=Path))
 @click.option("--output-dir", "-o", default="output", type=click.Path(path_type=Path))
-@click.option("--model", "-m", default="claude-sonnet-4-20250514")
+@click.option("--model", "-m", default=None)
 @click.pass_context
 def build(ctx, data_dir: Path, output_dir: Path, model: str):
     """Run the full pipeline: extract -> summarize -> tree -> publish."""

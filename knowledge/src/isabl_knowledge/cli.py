@@ -1,5 +1,6 @@
 """CLI for the Isabl knowledge tree pipeline."""
 
+import json
 from pathlib import Path
 
 import click
@@ -22,14 +23,28 @@ def cli(ctx, config: Path):
 
 
 @cli.command()
+@click.option("--output-dir", "-o", default="data", type=click.Path(path_type=Path))
 @click.pass_context
-def extract(ctx):
+def extract(ctx, output_dir: Path):
     """Extract content from all configured sources."""
     cfg = ctx.obj["config"]
-    click.echo(f"Extracting from {len(cfg.sources)} sources...")
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    all_docs = []
     for source in cfg.sources:
-        click.echo(f"  - {source.name} ({source.type})")
-    click.echo("Extract not yet implemented.")
+        click.echo(f"Extracting: {source.name} ({source.type})...")
+        try:
+            from isabl_knowledge.extractors.registry import get_extractor
+            extractor = get_extractor(source)
+            docs = extractor.extract()
+            all_docs.extend(docs)
+            click.echo(f"  → {len(docs)} documents")
+        except Exception as e:
+            click.echo(f"  → Skipped: {e}")
+
+    out_file = output_dir / "documents.json"
+    out_file.write_text(json.dumps([d.model_dump() for d in all_docs], indent=2))
+    click.echo(f"\nTotal: {len(all_docs)} documents saved to {out_file}")
 
 
 @cli.command()

@@ -14,9 +14,9 @@ from __future__ import annotations
 
 import os
 
-from openai import OpenAI
+from openai import AsyncOpenAI, OpenAI
 
-DEFAULT_MODEL = "claude-sonnet-4-20250514"
+DEFAULT_MODEL = "gpt-4.1-mini"
 
 
 def get_client() -> OpenAI:
@@ -29,6 +29,18 @@ def get_client() -> OpenAI:
         kwargs["base_url"] = base_url
 
     return OpenAI(**kwargs)
+
+
+def get_async_client() -> AsyncOpenAI:
+    """Get an async OpenAI-compatible client."""
+    base_url = os.environ.get("LLM_BASE_URL")
+    api_key = os.environ.get("LLM_API_KEY") or os.environ.get("OPENAI_API_KEY", "")
+
+    kwargs = {"api_key": api_key}
+    if base_url:
+        kwargs["base_url"] = base_url
+
+    return AsyncOpenAI(**kwargs)
 
 
 def get_default_model() -> str:

@@ -64,10 +64,11 @@ def summarize(ctx, data_dir: Path, model: str):
 
     raw = json.loads(docs_file.read_text())
     docs = [Document(**d) for d in raw]
+    pending = sum(1 for d in docs if not d.summary)
     effective_model = model or get_default_model()
-    click.echo(f"Summarizing {len(docs)} documents with {effective_model}...")
+    click.echo(f"Summarizing {pending}/{len(docs)} documents with {effective_model}...")
 
-    summarized = summarize_documents(docs, model=model)
+    summarized = summarize_documents(docs, model=model, output_path=docs_file)
 
     docs_file.write_text(json.dumps([d.model_dump() for d in summarized], indent=2))
     click.echo(f"Summaries saved to {docs_file}")

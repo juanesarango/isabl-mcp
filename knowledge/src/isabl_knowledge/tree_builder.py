@@ -48,10 +48,25 @@ def build_tree(docs: list[Document], model: str | None = None) -> TreeNode:
 
     response = client.chat.completions.create(
         model=model,
-        max_completion_tokens=16384,
+        max_completion_tokens=32768,
         messages=[{"role": "user", "content": prompt}],
     )
 
-    text = response.choices[0].message.content
+    text = response.choices[0].message.content or ""
+    # Strip markdown fencing if present
+    text = text.strip()
+    if text.startswith("```"):
+        text = text.split("\n", 1)[1] if "\n" in text else text[3:]
+    if text.endswith("```"):
+        text = text[:-3]
+    text = text.strip()
+
+    if not text:
+        raise ValueError(
+            f"LLM returned empty response. "
+            f"Finish reason: {response.choices[0].finish_reason}, "
+            f"Usage: {response.usage}"
+        )
+
     data = json.loads(text)
     return TreeNode(**data)

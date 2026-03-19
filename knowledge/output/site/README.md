@@ -1,14 +1,13 @@
-# Isabl Knowledge Tree (root)
+# Isabl Knowledge Tree (top)
 
-Top-level navigation for Isabl documentation and CLI libraries organized by user intent: onboarding, data management, applications & analyses, CLI commands, execution, API client helpers, configuration, and utilities/errors.
+High-level, user-focused documentation tree for the Isabl platform. Organizes content by user intent: getting started, data management, applications & analyses, CLI usage, job submission, API models & endpoints, and utilities/errors.
 
 ## Contents
 
-- [Documentation & Onboarding](./documentation-onboarding/) — User-facing docs, quickstarts and reference pages that introduce Isabl, its data model, and common operational guides.
-- [Data Management & Import](./data-management-import/) — Tools and workflows for discovering, importing, registering and organizing raw and reference data in Isabl storage.
-- [Applications, Analyses & Merging](./applications-analyses-merging/) — Develop, validate and run metadata-driven applications; collect results; and merge/aggregate analyses at individual or project scope.
-- [CLI Usage, Commands & Options](./cli-usage-commands-options/) — Command-line entrypoints, common commands for data retrieval and analysis management, and option helpers for composing CLI behaviors.
-- [Execution & Batch Systems](./execution-batch-systems/) — Integration points for dispatching analysis jobs to local or cluster batch systems and guidance on supported schedulers.
-- [API Client & Resource Utilities](./api-client-resource-utilities/) — HTTP helpers, authentication, resource CRUD operations, pagination helpers and lightweight client-side serialization wrappers for interacting with the Isabl REST API.
-- [Configuration, Settings & Deployment](./configuration-settings-deployment/) — Settings management, dynamic import helpers and deployment guidance for production installs and runtime configuration.
-- [Utilities, Validation & Errors](./utilities-validation-errors/) — General-purpose utilities, filesystem helpers, validators and the library's custom exception types for robust error handling.
+- [Documentation & Getting Started](./documentation-getting-started/) — High-level docs, tutorials and concept pages for new users and administrators.
+- [Data Management & Import](./data-management-import/) — Tools and patterns to import, register, validate and manage raw and reference data in Isabl.
+- [Applications & Analysis Workflows](./applications-analysis-workflows/) — Building, running and managing analytical applications and analyses: application interface, validation, execution and result collection.
+- [CLI Usage & Tooling](./cli-usage-tooling/) — How to use the isabl-cli: entrypoints, built-in commands, options, settings and helpful utilities.
+- [Job Submission & Batch Systems](./job-submission-batch-systems/) — Integrations with cluster schedulers and submission helpers for scalable execution.
+- [API Models, Serializers & Endpoints](./api-models-serializers-endpoints/) — The server-side data model, DRF serializers and API views that expose Isabl resources and result files.
+- [Utilities, Errors & Validation](./utilities-errors-validation/) — Shared exceptions, validators and miscellaneous small utilities used by CLI and server components.

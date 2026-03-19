@@ -10,6 +10,15 @@ sources:
     type: gitbook
     url: https://docs.isabl.io
 
+  - name: isabl_api
+    type: django_api
+    repo: papaemmelab/isabl_api
+
+  # Optional: uncomment when you have a swagger.json generated
+  # - name: isabl_api_openapi
+  #   type: openapi
+  #   url: knowledge/data/swagger.json
+
 tree:
   max_depth: 4
   max_nodes: 100

@@ -4,13 +4,17 @@ from __future__ import annotations
 
 from isabl_knowledge.config import SourceConfig
 from isabl_knowledge.extractors.base import BaseExtractor
+from isabl_knowledge.extractors.django_api import DjangoAPIExtractor
 from isabl_knowledge.extractors.gitbook import GitbookExtractor
 from isabl_knowledge.extractors.github_python import PythonExtractor
+from isabl_knowledge.extractors.openapi import OpenAPIExtractor
 
 
 EXTRACTORS: dict[str, type[BaseExtractor]] = {
     "github_python": PythonExtractor,
     "gitbook": GitbookExtractor,
+    "openapi": OpenAPIExtractor,
+    "django_api": DjangoAPIExtractor,
 }
 
 

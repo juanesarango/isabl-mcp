@@ -12,13 +12,21 @@ logger = logging.getLogger(__name__)
 
 TREE_PROMPT = """You are organizing documentation for the Isabl genomics platform into a navigable knowledge tree.
 
-Given these {count} documents (each with doc_id, title, summary, tags), create a hierarchical tree structure:
+Given these {count} documents (each with doc_id, title, summary, tags), create a DEEP hierarchical tree:
 
-- Max 4 levels deep
-- Max 100 nodes
-- Group by capabilities and use cases, not code structure
-- Each leaf node should list the doc_ids of relevant documents
-- Each node needs: id (dotted notation like "0001.0002"), title, summary, and optionally children or documents
+STRUCTURE REQUIREMENTS:
+- Use 3-4 levels of depth (root → domain → area → topic → documents)
+- Root should have 5-8 top-level domains
+- Each domain should have 2-5 areas
+- Areas with 8+ documents MUST be split into sub-topics
+- Only leaf nodes list doc_ids — intermediate nodes have children only
+- Max 100 total nodes
+- Each node needs: id (dotted notation like "0001.0002.0003"), title, summary, and either children or documents (never both)
+
+GROUPING GUIDELINES:
+- Group by user intent and capabilities, not code structure
+- Think: "What would a researcher/engineer search for?"
+- Example levels: "Data Management" → "Importing Data" → "File Formats & Validation" → [doc_ids]
 
 Documents:
 {documents}

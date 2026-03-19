@@ -1,289 +1,133 @@
 {
-  "id": "0000",
+  "id": "0001",
   "title": "Isabl Knowledge Tree (root)",
-  "summary": "Top-level navigation for Isabl platform documentation organized by capabilities and use cases (CLI, data import, applications, execution, settings, utilities, errors, automation, and user-facing docs). Each leaf points to relevant source documents by doc_id.",
+  "summary": "Top-level navigation for Isabl documentation and CLI libraries organized by user intent: onboarding, data management, applications & analyses, CLI commands, execution, API client helpers, configuration, and utilities/errors.",
   "children": [
     {
-      "id": "0001",
-      "title": "API & HTTP Helpers",
-      "summary": "Client-side helpers for communicating with the Isabl API: request building, retries, pagination, resource CRUD, authentication, and Isabl-specific serialization wrappers.",
+      "id": "0001.0001",
+      "title": "Documentation & Onboarding",
+      "summary": "User-facing docs, quickstarts and reference pages that introduce Isabl, its data model, and common operational guides.",
       "children": [
         {
-          "id": "0001.0001",
-          "title": "HTTP & Request Helpers",
-          "summary": "Generic request utilities, URL normalization, retries and a high-level api_request wrapper used by CLI operations.",
+          "id": "0001.0001.0001",
+          "title": "Overview & Quick Start",
+          "summary": "High-level introductions to the Isabl platform and a short quick-start tutorial to get up and running.",
           "children": [],
           "documents": [
-            "isabl_cli/isabl_cli/api.py:get_api_url",
-            "isabl_cli/isabl_cli/api.py:retry_request",
-            "isabl_cli/isabl_cli/api.py:api_request",
-            "isabl_cli/isabl_cli/api.py:process_api_filters",
-            "isabl_cli/isabl_cli/api.py:send_analytics"
+            "docs/index",
+            "docs/quick-start"
           ]
         },
         {
-          "id": "0001.0002",
-          "title": "Authentication & Token Management",
-          "summary": "Helpers for obtaining, caching and attaching API authentication tokens to requests.",
+          "id": "0001.0001.0002",
+          "title": "Tutorials, Tips & Community",
+          "summary": "Guides for contributors, practical tips and pointers to common CLI workflows and UX improvements.",
           "children": [],
           "documents": [
-            "isabl_cli/isabl_cli/api.py:get_token_headers"
+            "docs/bonus-tips",
+            "docs/contributing-guide",
+            "docs/other-cli-commands"
           ]
         },
         {
-          "id": "0001.0003",
-          "title": "Pagination, Batching & Iteration",
-          "summary": "Helpers to iterate paginated API endpoints and to batch or chunk work for bulk operations.",
+          "id": "0001.0001.0003",
+          "title": "Data & Import Reference",
+          "summary": "Documentation focused on Isabl's data model and the principles and options for importing and retrieving data.",
           "children": [],
           "documents": [
-            "isabl_cli/isabl_cli/api.py:iterate",
-            "isabl_cli/isabl_cli/api.py:chunks"
+            "docs/data-model",
+            "docs/import-data",
+            "docs/retrieve-data"
           ]
         },
         {
-          "id": "0001.0004",
-          "title": "Resource CRUD & Retrieval",
-          "summary": "Convenience routines for fetching, listing, creating, patching and deleting API resources, plus specialized getters for projects, experiments and analyses.",
+          "id": "0001.0001.0004",
+          "title": "Operational & Reference Guides",
+          "summary": "Operational topics such as automation with signals, maintenance, supported batch systems, settings and application development guidance.",
           "children": [],
           "documents": [
-            "isabl_cli/isabl_cli/api.py:get_instance",
-            "isabl_cli/isabl_cli/api.py:create_instance",
-            "isabl_cli/isabl_cli/api.py:patch_instance",
-            "isabl_cli/isabl_cli/api.py:delete_instance",
-            "isabl_cli/isabl_cli/api.py:get_instances",
-            "isabl_cli/isabl_cli/api.py:get_experiments",
-            "isabl_cli/isabl_cli/api.py:get_analyses",
-            "isabl_cli/isabl_cli/api.py:get_projects",
-            "isabl_cli/isabl_cli/api.py:get_instances_count",
-            "isabl_cli/isabl_cli/api.py:get_tree",
-            "isabl_cli/isabl_cli/api.py:get_trees",
-            "isabl_cli/isabl_cli/api.py:get_fastq"
-          ]
-        },
-        {
-          "id": "0001.0005",
-          "title": "IsablDict & Serialization Helpers",
-          "summary": "Utilities to convert arbitrary Python objects and nested dicts into IsablDict instances and Isabl-specific accessors (custom field access, popping and representations).",
-          "children": [],
-          "documents": [
-            "isabl_cli/isabl_cli/api.py:isablfy",
-            "isabl_cli/isabl_cli/api.py:fromDict",
-            "isabl_cli/isabl_cli/api.py:get",
-            "isabl_cli/isabl_cli/api.py:pop",
-            "isabl_cli/isabl_cli/api.py:__init__",
-            "isabl_cli/isabl_cli/api.py:__repr__"
-          ]
-        },
-        {
-          "id": "0001.0006",
-          "title": "Analysis-specific API Helpers & Notifications",
-          "summary": "Helpers to fetch/validate analysis results, patch analysis statuses in bulk or singly, and send error/notification emails.",
-          "children": [],
-          "documents": [
-            "isabl_cli/isabl_cli/api.py:patch_analyses_status",
-            "isabl_cli/isabl_cli/api.py:patch_analysis_status",
-            "isabl_cli/isabl_cli/api.py:_get_analysis_results",
-            "isabl_cli/isabl_cli/api.py:send_error_email"
+            "docs/operational-automations",
+            "docs/maintenance",
+            "docs/batch-systems",
+            "docs/isabl-settings",
+            "docs/project-privacy",
+            "docs/writing-applications"
           ]
         }
       ],
       "documents": []
     },
     {
-      "id": "0002",
-      "title": "Application Framework & Lifecycle",
-      "summary": "APIs, hooks and helpers to author, validate, run and collect results from Isabl Applications \u2014 the metadata-driven analysis units that submit jobs and record tracked analyses.",
+      "id": "0001.0002",
+      "title": "Data Management & Import",
+      "summary": "Tools and workflows for discovering, importing, registering and organizing raw and reference data in Isabl storage.",
       "children": [
         {
-          "id": "0002.0001",
-          "title": "Application Interface & Core Lifecycle",
-          "summary": "AbstractApplication contract, dependency resolution, command generation and the run orchestration used to create and submit analyses.",
+          "id": "0001.0002.0001",
+          "title": "Import Engines & CLI wrappers",
+          "summary": "Importer classes and the CLI wrappers that drive bulk and local import operations for experiments, BEDs and reference data.",
           "children": [],
           "documents": [
-            "isabl_cli/isabl_cli/app.py:AbstractApplication",
-            "isabl_cli/isabl_cli/app.py:get_dependencies",
-            "isabl_cli/isabl_cli/app.py:get_command",
-            "isabl_cli/isabl_cli/app.py:run",
-            "isabl_cli/isabl_cli/app.py:run_analyses",
-            "isabl_cli/isabl_cli/app.py:get_experiments_from_cli_options",
-            "isabl_cli/isabl_cli/app.py:get_experiments_from_default_cli_options",
-            "isabl_cli/isabl_cli/app.py:client_id",
-            "isabl_cli/isabl_cli/app.py:primary_key",
-            "isabl_cli/isabl_cli/app.py:application",
-            "isabl_cli/isabl_cli/app.py:settings",
-            "isabl_cli/isabl_cli/app.py:__repr__"
-          ]
-        },
-        {
-          "id": "0002.0002",
-          "title": "Results, Artifacts & Post-completion Hooks",
-          "summary": "Hooks and helpers to collect per-analysis, per-individual and per-project results, attach logs/scripts, pattern-based result discovery, and to expose results via API.",
-          "children": [],
-          "documents": [
-            "isabl_cli/isabl_cli/app.py:get_analysis_results",
-            "isabl_cli/isabl_cli/app.py:get_individual_analysis_results",
-            "isabl_cli/isabl_cli/app.py:get_project_analysis_results",
-            "isabl_cli/isabl_cli/app.py:_get_analysis_results",
-            "isabl_cli/isabl_cli/app.py:_get_analysis_results_from_patterns",
-            "isabl_cli/isabl_cli/app.py:get_result",
-            "isabl_cli/isabl_cli/app.py:get_results"
-          ]
-        },
-        {
-          "id": "0002.0003",
-          "title": "Merging & Aggregation Workflows",
-          "summary": "Project- and individual-level merge hooks, validation and the logic to create or submit aggregated merge analyses.",
-          "children": [],
-          "documents": [
-            "isabl_cli/isabl_cli/app.py:merge_project_analyses",
-            "isabl_cli/isabl_cli/app.py:validate_project_analyses",
-            "isabl_cli/isabl_cli/app.py:merge_individual_analyses",
-            "isabl_cli/isabl_cli/app.py:validate_individual_analyses",
-            "isabl_cli/isabl_cli/app.py:submit_merge_analysis",
-            "isabl_cli/isabl_cli/app.py:run_project_merge",
-            "isabl_cli/isabl_cli/app.py:run_individual_merge",
-            "isabl_cli/isabl_cli/app.py:get_project_level_auto_merge_analysis",
-            "isabl_cli/isabl_cli/app.py:get_individual_level_auto_merge_analysis",
-            "isabl_cli/isabl_cli/data.py:trigger_analyses_merge"
-          ]
-        },
-        {
-          "id": "0002.0004",
-          "title": "Validation & Input Guards",
-          "summary": "Rich set of pre-flight checks and validators to ensure correct experiments, sample roles, data types, species, assembly compatibility, bed/bam presence, pairing rules and other constraints before launching analyses.",
-          "children": [],
-          "documents": [
-            "isabl_cli/isabl_cli/app.py:validate_settings",
-            "isabl_cli/isabl_cli/app.py:validate_experiments",
-            "isabl_cli/isabl_cli/app.py:validate_bams",
-            "isabl_cli/isabl_cli/app.py:validate_bedfiles",
-            "isabl_cli/isabl_cli/app.py:validate_is_file",
-            "isabl_cli/isabl_cli/app.py:validate_is_dir",
-            "isabl_cli/isabl_cli/app.py:validate_reference_genome",
-            "isabl_cli/isabl_cli/app.py:validate_has_raw_data",
-            "isabl_cli/isabl_cli/app.py:validate_single_data_type",
-            "isabl_cli/isabl_cli/app.py:validate_fastq_only",
-            "isabl_cli/isabl_cli/app.py:validate_is_pair",
-            "isabl_cli/isabl_cli/app.py:validate_one_target",
-            "isabl_cli/isabl_cli/app.py:validate_one_target_no_references",
-            "isabl_cli/isabl_cli/app.py:validate_at_least_one_target_one_reference",
-            "isabl_cli/isabl_cli/app.py:validate_targets_not_in_references",
-            "isabl_cli/isabl_cli/app.py:validate_methods",
-            "isabl_cli/isabl_cli/app.py:validate_pdx_only",
-            "isabl_cli/isabl_cli/app.py:validate_dna_only",
-            "isabl_cli/isabl_cli/app.py:validate_rna_only",
-            "isabl_cli/isabl_cli/app.py:validate_dna_pairs",
-            "isabl_cli/isabl_cli/app.py:validate_same_technique",
-            "isabl_cli/isabl_cli/app.py:validate_same_platform",
-            "isabl_cli/isabl_cli/app.py:validate_species",
-            "isabl_cli/isabl_cli/app.py:validate_are_normals",
-            "isabl_cli/isabl_cli/app.py:validate_individuals",
-            "isabl_cli/isabl_cli/app.py:validate_source"
-          ]
-        },
-        {
-          "id": "0002.0005",
-          "title": "CLI Integration, Artifacts & Notifications",
-          "summary": "Helpers to expose applications as CLI commands, generate job scripts/log paths, patch status from jobs, send analytics after runs and notify project analysts.",
-          "children": [],
-          "documents": [
-            "isabl_cli/isabl_cli/app.py:as_cli_command",
-            "isabl_cli/isabl_cli/app.py:get_cli_command_name",
-            "isabl_cli/isabl_cli/app.py:get_command_script_path",
-            "isabl_cli/isabl_cli/app.py:get_command_log_path",
-            "isabl_cli/isabl_cli/app.py:get_command_err_path",
-            "isabl_cli/isabl_cli/app.py:write_command_script",
-            "isabl_cli/isabl_cli/app.py:get_patch_status_command",
-            "isabl_cli/isabl_cli/app.py:get_job_name",
-            "isabl_cli/isabl_cli/app.py:echo_run_summary",
-            "isabl_cli/isabl_cli/app.py:send_analytics",
-            "isabl_cli/isabl_cli/app.py:notify_project_analyst",
-            "isabl_cli/isabl_cli/app.py:update_experiment_bam_file",
-            "isabl_cli/isabl_cli/app.py:get_bedfile",
-            "isabl_cli/isabl_cli/app.py:get_bam",
-            "isabl_cli/isabl_cli/app.py:get_bams",
-            "isabl_cli/isabl_cli/app.py:patch_application_settings",
-            "isabl_cli/isabl_cli/app.py:_get_dependencies_results"
-          ]
-        }
-      ],
-      "documents": []
-    },
-    {
-      "id": "0003",
-      "title": "Data Import & Storage Management",
-      "summary": "Tools and import engines to associate raw files with experiments, register reference resources (BEDs, genomes), create storage directories, symlink/move files, and validate ownership/readability.",
-      "children": [
-        {
-          "id": "0003.0001",
-          "title": "Importers & Import Workflows",
-          "summary": "Local import engines and batch import features to discover, match and commit raw files to experiments and to register reference resources for assemblies/techniques.",
-          "children": [],
-          "documents": [
-            "isabl_cli/isabl_cli/data.py:LocalDataImporter",
             "isabl_cli/isabl_cli/data.py:LocalReferenceDataImporter",
             "isabl_cli/isabl_cli/data.py:LocalReferenceGenomeImporter",
             "isabl_cli/isabl_cli/data.py:LocalBedImporter",
+            "isabl_cli/isabl_cli/data.py:LocalDataImporter",
             "isabl_cli/isabl_cli/data.py:import_data",
             "isabl_cli/isabl_cli/data.py:import_data_from_yaml",
-            "isabl_cli/isabl_cli/data.py:import_bedfiles",
-            "isabl_cli/isabl_cli/data.py:cmd",
-            "isabl_cli/isabl_cli/data.py:as_cli_command"
+            "isabl_cli/isabl_cli/data.py:as_cli_command",
+            "isabl_cli/isabl_cli/data.py:import_bedfiles"
           ]
         },
         {
-          "id": "0003.0002",
-          "title": "File Operations, Linking & Delivery",
-          "summary": "Filesystem operations used during import and delivery: symlinks, copying, moving, symlinking experiments into project directories and exposing analysis outputs to targets.",
-          "children": [],
-          "documents": [
-            "isabl_cli/isabl_cli/data.py:symlink",
-            "isabl_cli/isabl_cli/data.py:move",
-            "isabl_cli/isabl_cli/data.py:copy",
-            "isabl_cli/isabl_cli/data.py:symlink_experiment_to_projects",
-            "isabl_cli/isabl_cli/data.py:symlink_analysis_to_targets",
-            "isabl_cli/isabl_cli/data.py:echo_src_dst"
-          ]
-        },
-        {
-          "id": "0003.0003",
-          "title": "Storage Directories & Path Management",
-          "summary": "Helpers to compute and create hashed or structured storage directories, claim storage URLs for instances, update storage metadata and to soft-delete or trash analysis storage.",
+          "id": "0001.0002.0002",
+          "title": "Storage Management",
+          "summary": "Compute and create storage directories, patch instance storage URLs, and register files into instance storage.",
           "children": [],
           "documents": [
             "isabl_cli/isabl_cli/data.py:_make_storage_directory",
             "isabl_cli/isabl_cli/data.py:get_storage_url",
             "isabl_cli/isabl_cli/data.py:update_storage_url",
-            "isabl_cli/isabl_cli/data.py:trash_analysis_storage",
             "isabl_cli/isabl_cli/data.py:import_files",
-            "isabl_cli/isabl_cli/data.py:get_summary",
-            "isabl_cli/isabl_cli/data.py:get_regex_pattern"
+            "isabl_cli/isabl_cli/data.py:trash_analysis_storage",
+            "isabl_cli/isabl_cli/data.py:get_summary"
           ]
         },
         {
-          "id": "0003.0004",
-          "title": "BED, Reference Files & Preprocessing",
-          "summary": "Tools to process BED files (sort/bgzip/tabix), import and register technique/assembly reference data and prepare capture kit resources for pipelines.",
+          "id": "0001.0002.0003",
+          "title": "File Transfer & Linking",
+          "summary": "Helpers to copy/move/symlink files and expose experiment or analysis outputs into project or delivery directories.",
+          "children": [],
+          "documents": [
+            "isabl_cli/isabl_cli/data.py:symlink_experiment_to_projects",
+            "isabl_cli/isabl_cli/data.py:symlink_analysis_to_targets",
+            "isabl_cli/isabl_cli/data.py:symlink",
+            "isabl_cli/isabl_cli/data.py:move",
+            "isabl_cli/isabl_cli/data.py:copy",
+            "isabl_cli/isabl_cli/data.py:echo_src_dst"
+          ]
+        },
+        {
+          "id": "0001.0002.0004",
+          "title": "BED & Reference File Processing",
+          "summary": "Prepare and register BED and other reference resources (sorting, bgzip, tabix) and commands to register technique-specific resources.",
           "children": [],
           "documents": [
             "isabl_cli/isabl_cli/data.py:process_bedfile",
             "isabl_cli/isabl_cli/data.py:import_bedfiles",
-            "isabl_cli/isabl_cli/data.py:LocalBedImporter",
-            "isabl_cli/isabl_cli/data.py:LocalReferenceDataImporter",
-            "isabl_cli/isabl_cli/data.py:LocalReferenceGenomeImporter",
-            "docs/batch-systems"
+            "isabl_cli/isabl_cli/data.py:cmd"
           ]
         },
         {
-          "id": "0003.0005",
-          "title": "Validation During Import",
-          "summary": "Checks performed by importers such as file-type detection, ownership/readability assertions and raw-data inspection for matching and QC.",
+          "id": "0001.0002.0005",
+          "title": "Validation & Path Matching",
+          "summary": "Utilities for detecting supported raw file types, matching paths to experiments, ownership/readability checks, regex helpers and per-file annotation hooks.",
           "children": [],
           "documents": [
             "isabl_cli/isabl_cli/data.py:raw_data_inspector",
+            "isabl_cli/isabl_cli/data.py:match_path",
             "isabl_cli/isabl_cli/data.py:check_ownership",
             "isabl_cli/isabl_cli/data.py:check_are_readable",
-            "isabl_cli/isabl_cli/data.py:match_path",
+            "isabl_cli/isabl_cli/data.py:get_regex_pattern",
             "isabl_cli/isabl_cli/data.py:annotate_file_data"
           ]
         }
@@ -291,71 +135,199 @@
       "documents": []
     },
     {
-      "id": "0004",
-      "title": "Batch Systems & Job Execution",
-      "summary": "Integrations and submission helpers for local and HPC schedulers (LSF, Slurm, SGE), including array submission helpers and scheduler-specific cleanup/seff/exit jobs.",
+      "id": "0001.0003",
+      "title": "Applications, Analyses & Merging",
+      "summary": "Develop, validate and run metadata-driven applications; collect results; and merge/aggregate analyses at individual or project scope.",
       "children": [
         {
-          "id": "0004.0001",
-          "title": "Supported Schedulers & Submission Entrypoints",
-          "summary": "Main submission functions that group commands by methods and hand off to scheduler-specific submission implementations.",
+          "id": "0001.0003.0001",
+          "title": "Developing Applications",
+          "summary": "APIs and hooks application authors implement: lifecycle, result collection and CLI metadata helpers.",
+          "children": [
+            {
+              "id": "0001.0003.0001.0001",
+              "title": "Interface & Lifecycle",
+              "summary": "Core abstract class and lifecycle hooks to implement application behavior and dependency resolution.",
+              "children": [],
+              "documents": [
+                "isabl_cli/isabl_cli/app.py:AbstractApplication",
+                "isabl_cli/isabl_cli/app.py:get_command",
+                "isabl_cli/isabl_cli/app.py:get_dependencies",
+                "isabl_cli/isabl_cli/app.py:validate_settings",
+                "isabl_cli/isabl_cli/app.py:get_experiments_from_cli_options",
+                "isabl_cli/isabl_cli/app.py:get_experiments_from_default_cli_options"
+              ]
+            },
+            {
+              "id": "0001.0003.0001.0002",
+              "title": "Results & Artifacts",
+              "summary": "Helpers to assemble analysis result dictionaries, discover files by pattern and combine dependency results for use at runtime or completion.",
+              "children": [],
+              "documents": [
+                "isabl_cli/isabl_cli/app.py:get_analysis_results",
+                "isabl_cli/isabl_cli/app.py:_get_analysis_results",
+                "isabl_cli/isabl_cli/app.py:_get_analysis_results_from_patterns",
+                "isabl_cli/isabl_cli/app.py:get_result",
+                "isabl_cli/isabl_cli/app.py:get_results",
+                "isabl_cli/isabl_cli/app.py:_get_dependencies_results"
+              ]
+            },
+            {
+              "id": "0001.0003.0001.0003",
+              "title": "CLI & Metadata Helpers",
+              "summary": "Convenience accessors for exposing applications as CLI commands and for retrieving application metadata like IDs, primary keys and assemblies.",
+              "children": [],
+              "documents": [
+                "isabl_cli/isabl_cli/app.py:as_cli_command",
+                "isabl_cli/isabl_cli/app.py:get_cli_command_name",
+                "isabl_cli/isabl_cli/app.py:__repr__",
+                "isabl_cli/isabl_cli/app.py:client_id",
+                "isabl_cli/isabl_cli/app.py:primary_key",
+                "isabl_cli/isabl_cli/app.py:settings",
+                "isabl_cli/isabl_cli/app.py:application",
+                "isabl_cli/isabl_cli/app.py:assembly"
+              ]
+            }
+          ],
+          "documents": []
+        },
+        {
+          "id": "0001.0003.0002",
+          "title": "Running Analyses & Submission",
+          "summary": "Orchestration and submission paths for running analyses, including summary reporting and submission controls.",
+          "children": [
+            {
+              "id": "0001.0003.0002.0001",
+              "title": "Execution & Submission",
+              "summary": "Top-level runners and logic to create or fetch analyses, execute runs, and emit analytics for runs.",
+              "children": [],
+              "documents": [
+                "isabl_cli/isabl_cli/app.py:run",
+                "isabl_cli/isabl_cli/app.py:run_analyses",
+                "isabl_cli/isabl_cli/app.py:get_or_create_analyses",
+                "isabl_cli/isabl_cli/app.py:get_existing_analyses",
+                "isabl_cli/isabl_cli/app.py:get_individual_level_analyses",
+                "isabl_cli/isabl_cli/app.py:submit_merge_analysis",
+                "isabl_cli/isabl_cli/app.py:send_analytics"
+              ]
+            },
+            {
+              "id": "0001.0003.0002.0002",
+              "title": "Job Scripts, Logs & Paths",
+              "summary": "Helpers to build job scripts, compute log/error paths and construct scheduler-friendly job names and patching commands.",
+              "children": [],
+              "documents": [
+                "isabl_cli/isabl_cli/app.py:get_job_name",
+                "isabl_cli/isabl_cli/app.py:get_command_script_path",
+                "isabl_cli/isabl_cli/app.py:get_command_log_path",
+                "isabl_cli/isabl_cli/app.py:get_command_err_path",
+                "isabl_cli/isabl_cli/app.py:write_command_script",
+                "isabl_cli/isabl_cli/app.py:get_patch_status_command",
+                "isabl_cli/isabl_cli/app.py:echo_run_summary"
+              ]
+            }
+          ],
+          "documents": []
+        },
+        {
+          "id": "0001.0003.0003",
+          "title": "Merging & Aggregation",
+          "summary": "Hooks and commands to merge multiple analyses into aggregated project- or individual-level analyses and to trigger merge jobs.",
           "children": [],
           "documents": [
-            "isabl_cli/isabl_cli/batch_systems/local.py:submit_local",
-            "isabl_cli/isabl_cli/batch_systems/lsf.py:submit_lsf",
-            "isabl_cli/isabl_cli/batch_systems/sge.py:submit_sge",
-            "isabl_cli/isabl_cli/batch_systems/slurm.py:submit_slurm",
-            "docs/batch-systems"
+            "isabl_cli/isabl_cli/app.py:merge_project_analyses",
+            "isabl_cli/isabl_cli/app.py:merge_individual_analyses",
+            "isabl_cli/isabl_cli/app.py:validate_project_analyses",
+            "isabl_cli/isabl_cli/app.py:validate_individual_analyses",
+            "isabl_cli/isabl_cli/app.py:get_project_level_auto_merge_analysis",
+            "isabl_cli/isabl_cli/app.py:get_individual_level_auto_merge_analysis",
+            "isabl_cli/isabl_cli/data.py:trigger_analyses_merge",
+            "isabl_cli/isabl_cli/app.py:run_project_merge",
+            "isabl_cli/isabl_cli/app.py:run_individual_merge"
           ]
         },
         {
-          "id": "0004.0002",
-          "title": "Array Submission Helpers & Cleanup Jobs",
-          "summary": "Scheduler-specific helpers to submit job arrays, schedule cleanup/exit/seff helper jobs, and support throttling, waiting and resource metric collection.",
-          "children": [],
-          "documents": [
-            "isabl_cli/isabl_cli/batch_systems/lsf.py:submit_lsf_array",
-            "isabl_cli/isabl_cli/batch_systems/sge.py:submit_sge_array",
-            "isabl_cli/isabl_cli/batch_systems/slurm.py:submit_slurm_array"
-          ]
-        },
-        {
-          "id": "0004.0003",
-          "title": "Local Execution & Development",
-          "summary": "Running jobs serially on the local machine for debugging or small-scale execution.",
-          "children": [],
-          "documents": [
-            "isabl_cli/isabl_cli/batch_systems/local.py:submit_local",
-            "docs/bonus-tips"
-          ]
+          "id": "0001.0003.0004",
+          "title": "Validation Rules & Sample/Assay Checks",
+          "summary": "A comprehensive set of validations that application authors and operators use to enforce input, sample pairing, assay, platform and species constraints.",
+          "children": [
+            {
+              "id": "0001.0003.0004.0001",
+              "title": "Input & File Validations",
+              "summary": "Checks that required files, reference indexes and raw inputs exist and match expected formats.",
+              "children": [],
+              "documents": [
+                "isabl_cli/isabl_cli/app.py:validate_is_file",
+                "isabl_cli/isabl_cli/app.py:validate_is_dir",
+                "isabl_cli/isabl_cli/app.py:validate_reference_genome",
+                "isabl_cli/isabl_cli/app.py:validate_has_raw_data",
+                "isabl_cli/isabl_cli/app.py:validate_fastq_only",
+                "isabl_cli/isabl_cli/app.py:validate_single_data_type",
+                "isabl_cli/isabl_cli/app.py:validate_bams",
+                "isabl_cli/isabl_cli/app.py:validate_bedfiles"
+              ]
+            },
+            {
+              "id": "0001.0003.0004.0002",
+              "title": "Sample Pairing & Roles",
+              "summary": "Validators that enforce correct target/reference pairing, single-target constraints and normal/control assignments.",
+              "children": [],
+              "documents": [
+                "isabl_cli/isabl_cli/app.py:validate_is_pair",
+                "isabl_cli/isabl_cli/app.py:validate_one_target",
+                "isabl_cli/isabl_cli/app.py:validate_one_target_no_references",
+                "isabl_cli/isabl_cli/app.py:validate_at_least_one_target_one_reference",
+                "isabl_cli/isabl_cli/app.py:validate_targets_not_in_references",
+                "isabl_cli/isabl_cli/app.py:validate_are_normals",
+                "isabl_cli/isabl_cli/app.py:validate_individuals",
+                "isabl_cli/isabl_cli/app.py:validate_dna_pairs"
+              ]
+            },
+            {
+              "id": "0001.0003.0004.0003",
+              "title": "Assay, Platform & Species Checks",
+              "summary": "Validators for experimental method compatibility, platform matching, species constraints and source material checks (PDX, DNA/RNA).",
+              "children": [],
+              "documents": [
+                "isabl_cli/isabl_cli/app.py:validate_methods",
+                "isabl_cli/isabl_cli/app.py:validate_pdx_only",
+                "isabl_cli/isabl_cli/app.py:validate_dna_only",
+                "isabl_cli/isabl_cli/app.py:validate_rna_only",
+                "isabl_cli/isabl_cli/app.py:validate_same_technique",
+                "isabl_cli/isabl_cli/app.py:validate_same_platform",
+                "isabl_cli/isabl_cli/app.py:validate_species",
+                "isabl_cli/isabl_cli/app.py:validate_source"
+              ]
+            }
+          ],
+          "documents": []
         }
       ],
       "documents": []
     },
     {
-      "id": "0005",
-      "title": "CLI Commands & User Tools",
-      "summary": "Top-level CLI entrypoint, user-facing commands for authentication, data retrieval, job/process management, and convenience helpers for interacting with Isabl from the terminal.",
+      "id": "0001.0004",
+      "title": "CLI Usage, Commands & Options",
+      "summary": "Command-line entrypoints, common commands for data retrieval and analysis management, and option helpers for composing CLI behaviors.",
       "children": [
         {
-          "id": "0005.0001",
-          "title": "CLI Entry & App Organization",
-          "summary": "Main CLI entrypoints and helpers that organize available applications for CLI presentation or invocation.",
+          "id": "0001.0004.0001",
+          "title": "Entry & Organization",
+          "summary": "CLI entrypoint and organizational helpers that show and group available applications and commands.",
           "children": [],
           "documents": [
             "isabl_cli/isabl_cli/cli.py:main",
-            "isabl_cli/isabl_cli/cli.py:add_apps_groups"
+            "isabl_cli/isabl_cli/cli.py:add_apps_groups",
+            "isabl_cli/isabl_cli/app.py:command"
           ]
         },
         {
-          "id": "0005.0002",
-          "title": "User-facing Commands (authentication, retrieval, management)",
-          "summary": "Commands exposed to end users for login, retrieving metadata/results/paths/data, running and merging analyses, running signals, and patching statuses or results.",
+          "id": "0001.0004.0002",
+          "title": "Data Retrieval & Path Commands",
+          "summary": "Commands to locate files, directories and metadata for experiments, analyses, references and storage locations.",
           "children": [],
           "documents": [
-            "isabl_cli/isabl_cli/commands.py:login",
             "isabl_cli/isabl_cli/commands.py:get_metadata",
-            "isabl_cli/isabl_cli/commands.py:get_count",
             "isabl_cli/isabl_cli/commands.py:get_paths",
             "isabl_cli/isabl_cli/commands.py:get_outdirs",
             "isabl_cli/isabl_cli/commands.py:get_data",
@@ -363,41 +335,172 @@
             "isabl_cli/isabl_cli/commands.py:get_reference",
             "isabl_cli/isabl_cli/commands.py:get_results",
             "isabl_cli/isabl_cli/commands.py:get_bams",
-            "isabl_cli/isabl_cli/commands.py:merge_project_analyses",
-            "isabl_cli/isabl_cli/commands.py:merge_individual_analyses",
-            "isabl_cli/isabl_cli/commands.py:process_finished",
-            "isabl_cli/isabl_cli/commands.py:patch_results",
-            "isabl_cli/isabl_cli/commands.py:patch_status",
-            "isabl_cli/isabl_cli/commands.py:rerun_signals",
-            "isabl_cli/isabl_cli/commands.py:run_web_signals",
-            "isabl_cli/isabl_cli/commands.py:run_signals",
-            "isabl_cli/isabl_cli/commands.py:reject_analysis",
-            "isabl_cli/isabl_cli/commands.py:cb_app_results_keys"
+            "isabl_cli/isabl_cli/commands.py:get_count"
           ]
         },
         {
-          "id": "0005.0003",
-          "title": "Command Options & Callbacks",
-          "summary": "Helpers to create reusable Click options, callbacks and validators used by CLI commands (analysis filters, dependency selection, result-key helpers).",
+          "id": "0001.0004.0003",
+          "title": "Analysis Management Commands",
+          "summary": "CLI commands to process, patch, merge and manage analysis lifecycle and statuses.",
           "children": [],
           "documents": [
+            "isabl_cli/isabl_cli/commands.py:process_finished",
+            "isabl_cli/isabl_cli/commands.py:patch_results",
+            "isabl_cli/isabl_cli/commands.py:patch_status",
+            "isabl_cli/isabl_cli/commands.py:merge_project_analyses",
+            "isabl_cli/isabl_cli/commands.py:merge_individual_analyses",
+            "isabl_cli/isabl_cli/commands.py:reject_analysis"
+          ]
+        },
+        {
+          "id": "0001.0004.0004",
+          "title": "Signals & Automation (CLI)",
+          "summary": "Commands and signal integration to trigger or rerun automated workflows from the CLI or web frontend.",
+          "children": [],
+          "documents": [
+            "isabl_cli/isabl_cli/commands.py:rerun_signals",
+            "isabl_cli/isabl_cli/commands.py:run_web_signals",
+            "isabl_cli/isabl_cli/commands.py:run_signals",
+            "isabl_cli/isabl_cli/signals.py:resume_analysis_signal",
+            "isabl_cli/isabl_cli/signals.py:force_analysis_signal",
+            "isabl_cli/isabl_cli/signals.py:run_web_signals"
+          ]
+        },
+        {
+          "id": "0001.0004.0005",
+          "title": "CLI Helpers & Options",
+          "summary": "Utility callbacks and option factories to help construct consistent CLI behaviors and discover application result keys.",
+          "children": [],
+          "documents": [
+            "isabl_cli/isabl_cli/commands.py:cb_app_results_keys",
             "isabl_cli/isabl_cli/options.py:get_analyses_filters_option",
             "isabl_cli/isabl_cli/options.py:get_dependency_analyses_option",
-            "isabl_cli/isabl_cli/commands.py:cb_app_results_keys"
+            "isabl_cli/isabl_cli/app.py:print_url"
           ]
         }
       ],
       "documents": []
     },
     {
-      "id": "0006",
-      "title": "Settings & Configuration",
-      "summary": "Management of system-wide and per-user settings, dynamic import resolution for configured values, and helpers to build application-specific settings structures.",
+      "id": "0001.0005",
+      "title": "Execution & Batch Systems",
+      "summary": "Integration points for dispatching analysis jobs to local or cluster batch systems and guidance on supported schedulers.",
       "children": [
         {
-          "id": "0006.0001",
-          "title": "Settings Objects & Persistence",
-          "summary": "Classes and persistence primitives for per-user and base settings, including JSON-backed UserSettings and BaseSettings with defaults and import handling.",
+          "id": "0001.0005.0001",
+          "title": "Batch Systems Integrations",
+          "summary": "Submission helpers and array submission utilities for supported schedulers (SLURM, LSF, SGE) including auxiliary helper jobs and throttling.",
+          "children": [],
+          "documents": [
+            "isabl_cli/isabl_cli/batch_systems/slurm.py:submit_slurm",
+            "isabl_cli/isabl_cli/batch_systems/slurm.py:submit_slurm_array",
+            "isabl_cli/isabl_cli/batch_systems/lsf.py:submit_lsf",
+            "isabl_cli/isabl_cli/batch_systems/lsf.py:submit_lsf_array",
+            "isabl_cli/isabl_cli/batch_systems/sge.py:submit_sge",
+            "isabl_cli/isabl_cli/batch_systems/sge.py:submit_sge_array",
+            "docs/batch-systems"
+          ]
+        },
+        {
+          "id": "0001.0005.0002",
+          "title": "Local Execution",
+          "summary": "Run analysis commands locally (serial execution) for testing or small-scale runs.",
+          "children": [],
+          "documents": [
+            "isabl_cli/isabl_cli/batch_systems/local.py:submit_local"
+          ]
+        }
+      ],
+      "documents": []
+    },
+    {
+      "id": "0001.0006",
+      "title": "API Client & Resource Utilities",
+      "summary": "HTTP helpers, authentication, resource CRUD operations, pagination helpers and lightweight client-side serialization wrappers for interacting with the Isabl REST API.",
+      "children": [
+        {
+          "id": "0001.0006.0001",
+          "title": "HTTP, Auth & Networking",
+          "summary": "URL normalization, request wrappers, token management and retry logic to ensure reliable authenticated API calls.",
+          "children": [],
+          "documents": [
+            "isabl_cli/isabl_cli/api.py:get_api_url",
+            "isabl_cli/isabl_cli/api.py:retry_request",
+            "isabl_cli/isabl_cli/api.py:api_request",
+            "isabl_cli/isabl_cli/api.py:get_token_headers",
+            "isabl_cli/isabl_cli/api.py:send_analytics",
+            "isabl_cli/isabl_cli/api.py:send_error_email"
+          ]
+        },
+        {
+          "id": "0001.0006.0002",
+          "title": "Resource CRUD & Retrieval",
+          "summary": "Convenience functions to fetch, list, count and mutate resources (instances, experiments, analyses, projects) and to retrieve aggregated trees of related data.",
+          "children": [],
+          "documents": [
+            "isabl_cli/isabl_cli/api.py:get_instance",
+            "isabl_cli/isabl_cli/api.py:get_instances",
+            "isabl_cli/isabl_cli/api.py:get_instances_count",
+            "isabl_cli/isabl_cli/api.py:create_instance",
+            "isabl_cli/isabl_cli/api.py:patch_instance",
+            "isabl_cli/isabl_cli/api.py:delete_instance",
+            "isabl_cli/isabl_cli/api.py:get_experiments",
+            "isabl_cli/isabl_cli/api.py:get_analyses",
+            "isabl_cli/isabl_cli/api.py:get_projects",
+            "isabl_cli/isabl_cli/api.py:get_tree",
+            "isabl_cli/isabl_cli/api.py:get_trees",
+            "isabl_cli/isabl_cli/api.py:get_fastq",
+            "isabl_cli/isabl_cli/factories.py:projects"
+          ]
+        },
+        {
+          "id": "0001.0006.0003",
+          "title": "Pagination, Filters & Iteration",
+          "summary": "Helpers to format filter params, iterate paginated endpoints and batch items for efficient retrieval.",
+          "children": [],
+          "documents": [
+            "isabl_cli/isabl_cli/api.py:process_api_filters",
+            "isabl_cli/isabl_cli/api.py:iterate",
+            "isabl_cli/isabl_cli/api.py:chunks"
+          ]
+        },
+        {
+          "id": "0001.0006.0004",
+          "title": "Serialization & IsablDict Utilities",
+          "summary": "Utilities that convert API responses and nested Python objects into IsablDict wrappers and provide custom dict-like accessors and representations.",
+          "children": [],
+          "documents": [
+            "isabl_cli/isabl_cli/api.py:isablfy",
+            "isabl_cli/isabl_cli/api.py:fromDict",
+            "isabl_cli/isabl_cli/api.py:__init__",
+            "isabl_cli/isabl_cli/api.py:get",
+            "isabl_cli/isabl_cli/api.py:pop",
+            "isabl_cli/isabl_cli/api.py:__repr__"
+          ]
+        },
+        {
+          "id": "0001.0006.0005",
+          "title": "Analysis Results & Status Helpers",
+          "summary": "Server-side helpers for validating and patching analysis results and bulk status updates used by CLI and automation code.",
+          "children": [],
+          "documents": [
+            "isabl_cli/isabl_cli/api.py:patch_analyses_status",
+            "isabl_cli/isabl_cli/api.py:patch_analysis_status",
+            "isabl_cli/isabl_cli/api.py:_get_analysis_results"
+          ]
+        }
+      ],
+      "documents": []
+    },
+    {
+      "id": "0001.0007",
+      "title": "Configuration, Settings & Deployment",
+      "summary": "Settings management, dynamic import helpers and deployment guidance for production installs and runtime configuration.",
+      "children": [
+        {
+          "id": "0001.0007.0001",
+          "title": "Settings API & Persistence",
+          "summary": "Classes and methods to manage persisted per-user JSON settings, system defaults and reading/writing settings with import resolution.",
           "children": [],
           "documents": [
             "isabl_cli/isabl_cli/settings.py:UserSettings",
@@ -412,9 +515,9 @@
           ]
         },
         {
-          "id": "0006.0002",
-          "title": "Dynamic Imports & Application Resolution",
-          "summary": "Utilities that perform dynamic imports for configured import strings, import valid application identifiers from settings, and build application-specific settings dictionaries.",
+          "id": "0001.0007.0002",
+          "title": "Dynamic Imports & Application Settings",
+          "summary": "Helpers to resolve import strings, perform dynamic imports and build application-specific settings objects from defaults and configured values.",
           "children": [],
           "documents": [
             "isabl_cli/isabl_cli/settings.py:perform_import",
@@ -424,87 +527,37 @@
           ]
         },
         {
-          "id": "0006.0003",
-          "title": "Runtime Accessors & Identity",
-          "summary": "Helpers to fetch the current API username, client configuration and to determine whether the running user is an admin.",
+          "id": "0001.0007.0003",
+          "title": "Admin & Runtime Accessors",
+          "summary": "Convenience accessors for checking admin status and fetching current API username and client configuration.",
           "children": [],
           "documents": [
             "isabl_cli/isabl_cli/settings.py:is_admin_user",
             "isabl_cli/isabl_cli/settings.py:api_username",
             "isabl_cli/isabl_cli/settings.py:client"
           ]
-        }
-      ],
-      "documents": []
-    },
-    {
-      "id": "0007",
-      "title": "Utilities & Filesystem Helpers",
-      "summary": "General-purpose utilities used across the CLI and importers for filesystem operations, archiving, rsync command generation, results discovery, UX messages and debugging aids.",
-      "children": [
-        {
-          "id": "0007.0001",
-          "title": "Filesystem, Links & Archiving",
-          "summary": "Directory creation honoring mode, forced link/symlink helpers, tar archiving and directory size inspection utilities.",
-          "children": [],
-          "documents": [
-            "isabl_cli/isabl_cli/utils.py:makedirs",
-            "isabl_cli/isabl_cli/utils.py:force_link",
-            "isabl_cli/isabl_cli/utils.py:force_symlink",
-            "isabl_cli/isabl_cli/utils.py:tar_dir",
-            "isabl_cli/isabl_cli/utils.py:get_tree_size",
-            "isabl_cli/isabl_cli/utils.py:find_owner",
-            "isabl_cli/isabl_cli/utils.py:assert_same_owner"
-          ]
         },
         {
-          "id": "0007.0002",
-          "title": "Transfers & rsync Helpers",
-          "summary": "Helpers to build rsync command lines and to check installed rsync compatibility for append/verify features.",
+          "id": "0001.0007.0004",
+          "title": "Deployment Guides",
+          "summary": "Production deployment guidance for installing the Isabl API and CLI and operational considerations for production systems.",
           "children": [],
           "documents": [
-            "isabl_cli/isabl_cli/utils.py:get_rsync_command",
-            "isabl_cli/isabl_cli/utils.py:check_rsync_version"
-          ]
-        },
-        {
-          "id": "0007.0003",
-          "title": "Results Discovery & Experiment Utilities",
-          "summary": "Utilities that find analysis results on experiment records, wrapper helpers to obtain single results with clearer errors, and traversal helpers for nested dicts.",
-          "children": [],
-          "documents": [
-            "isabl_cli/isabl_cli/utils.py:get_results",
-            "isabl_cli/isabl_cli/utils.py:get_result",
-            "isabl_cli/isabl_cli/utils.py:traverse_dict",
-            "isabl_cli/isabl_cli/utils.py:first_matching_file"
-          ]
-        },
-        {
-          "id": "0007.0004",
-          "title": "CLI UX, Analytics & Debug Helpers",
-          "summary": "Message helpers for commit guidance and titles, decorators/application wrappers to send telemetry, and debugging utilities.",
-          "children": [],
-          "documents": [
-            "isabl_cli/isabl_cli/utils.py:echo_add_commit_message",
-            "isabl_cli/isabl_cli/utils.py:echo_title",
-            "isabl_cli/isabl_cli/utils.py:send_analytics",
-            "isabl_cli/isabl_cli/utils.py:wrapper",
-            "isabl_cli/isabl_cli/utils.py:called_from",
-            "isabl_cli/isabl_cli/utils.py:apply_decorators"
+            "docs/production-deployment"
           ]
         }
       ],
       "documents": []
     },
     {
-      "id": "0008",
-      "title": "Exceptions & Validators",
-      "summary": "Custom exception types used across isabl_cli and validation helpers for CLI options, files and pair definitions.",
+      "id": "0001.0008",
+      "title": "Utilities, Validation & Errors",
+      "summary": "General-purpose utilities, filesystem helpers, validators and the library's custom exception types for robust error handling.",
       "children": [
         {
-          "id": "0008.0001",
-          "title": "Custom Exceptions",
-          "summary": "Package-level exception hierarchy and common error types to signal validation issues, missing resources, configuration problems and automation failures.",
+          "id": "0001.0008.0001",
+          "title": "Exceptions & Error Types",
+          "summary": "Custom exception hierarchy used across the CLI and import machinery to signal validation, configuration and automation errors.",
           "children": [],
           "documents": [
             "isabl_cli/isabl_cli/exceptions.py:PackageBaseException",
@@ -519,126 +572,51 @@
           ]
         },
         {
-          "id": "0008.0002",
+          "id": "0001.0008.0002",
+          "title": "Filesystem & Transfer Utilities",
+          "summary": "Helpers for directory creation, transfers, archive creation, linking and ownership/permission checks used by import and storage workflows.",
+          "children": [],
+          "documents": [
+            "isabl_cli/isabl_cli/utils.py:makedirs",
+            "isabl_cli/isabl_cli/utils.py:get_rsync_command",
+            "isabl_cli/isabl_cli/utils.py:check_rsync_version",
+            "isabl_cli/isabl_cli/utils.py:get_tree_size",
+            "isabl_cli/isabl_cli/utils.py:force_link",
+            "isabl_cli/isabl_cli/utils.py:force_symlink",
+            "isabl_cli/isabl_cli/utils.py:tar_dir",
+            "isabl_cli/isabl_cli/utils.py:find_owner",
+            "isabl_cli/isabl_cli/utils.py:assert_same_owner",
+            "isabl_cli/isabl_cli/utils.py:check_admin"
+          ]
+        },
+        {
+          "id": "0001.0008.0003",
+          "title": "CLI Helpers & Misc Utilities",
+          "summary": "General helpers for CLI UX, traversal, decorator composition, analytics wrappers, searching files, and small debugging utilities.",
+          "children": [],
+          "documents": [
+            "isabl_cli/isabl_cli/utils.py:traverse_dict",
+            "isabl_cli/isabl_cli/utils.py:apply_decorators",
+            "isabl_cli/isabl_cli/utils.py:echo_add_commit_message",
+            "isabl_cli/isabl_cli/utils.py:echo_title",
+            "isabl_cli/isabl_cli/utils.py:called_from",
+            "isabl_cli/isabl_cli/utils.py:send_analytics",
+            "isabl_cli/isabl_cli/utils.py:first_matching_file",
+            "isabl_cli/isabl_cli/utils.py:wrapper",
+            "isabl_cli/isabl_cli/utils.py:get_results",
+            "isabl_cli/isabl_cli/utils.py:get_result"
+          ]
+        },
+        {
+          "id": "0001.0008.0004",
           "title": "Validators & CLI Callbacks",
-          "summary": "Validators for file/directory pattern arguments, and for resolving sample pairs from lists or TSV files used as Click callbacks.",
+          "summary": "Small validation utilities used for CLI argument validation: directory/file pattern checks and parsing sample pair TSVs.",
           "children": [],
           "documents": [
             "isabl_cli/isabl_cli/validators.py:validate_patterns_are_files",
             "isabl_cli/isabl_cli/validators.py:validate_patterns_are_dirs",
             "isabl_cli/isabl_cli/validators.py:validate_pairs",
             "isabl_cli/isabl_cli/validators.py:validate_pairs_from_file"
-          ]
-        }
-      ],
-      "documents": []
-    },
-    {
-      "id": "0009",
-      "title": "Signals & Automation",
-      "summary": "Signal functions and automation patterns that drive post-import or status-change workflows, and CLI triggers to run or rerun signals.",
-      "children": [
-        {
-          "id": "0009.0001",
-          "title": "Signal Handlers & Runners",
-          "summary": "Signal definitions to resume, force-restart, or remotely trigger analyses and functions that bridge web-initiated events to CLI-executable triggers.",
-          "children": [],
-          "documents": [
-            "isabl_cli/isabl_cli/signals.py:resume_analysis_signal",
-            "isabl_cli/isabl_cli/signals.py:force_analysis_signal",
-            "isabl_cli/isabl_cli/signals.py:run_web_signals",
-            "isabl_cli/isabl_cli/commands.py:run_web_signals",
-            "isabl_cli/isabl_cli/commands.py:rerun_signals",
-            "docs/operational-automations"
-          ]
-        }
-      ],
-      "documents": []
-    },
-    {
-      "id": "0010",
-      "title": "Documentation & Guides",
-      "summary": "Top-level user and developer documentation pages explaining Isabl features, deployment, import workflows, data model and tutorials.",
-      "children": [
-        {
-          "id": "0010.0001",
-          "title": "Overview & Getting Started",
-          "summary": "Home page, quick start and onboarding materials to get an Isabl instance running and to register metadata/import data.",
-          "children": [],
-          "documents": [
-            "docs/index",
-            "docs/quick-start"
-          ]
-        },
-        {
-          "id": "0010.0002",
-          "title": "Data Model & Importing Data",
-          "summary": "Documentation describing Isabl's normalized data model (individuals, samples, experiments) and detailed import workflows for raw data and YAML manifests.",
-          "children": [],
-          "documents": [
-            "docs/data-model",
-            "docs/import-data",
-            "docs/retrieve-data"
-          ]
-        },
-        {
-          "id": "0010.0003",
-          "title": "Applications & Workflows",
-          "summary": "Guides for developing metadata-driven Applications that submit to multiple compute backends and how to write/author apps for the platform.",
-          "children": [],
-          "documents": [
-            "docs/writing-applications",
-            "docs/other-cli-commands"
-          ]
-        },
-        {
-          "id": "0010.0004",
-          "title": "Deployment, Settings & Maintenance",
-          "summary": "Instructions for production deployment, configuring Isabl settings, backups and operational best practices.",
-          "children": [],
-          "documents": [
-            "docs/production-deployment",
-            "docs/isabl-settings",
-            "docs/maintenance"
-          ]
-        },
-        {
-          "id": "0010.0005",
-          "title": "Operational Tips & Privacy",
-          "summary": "Extra tips for CLI usability, scheduler integrations, and notes on project privacy and access control.",
-          "children": [],
-          "documents": [
-            "docs/bonus-tips",
-            "docs/batch-systems",
-            "docs/project-privacy",
-            "docs/contributing-guide"
-          ]
-        }
-      ],
-      "documents": []
-    },
-    {
-      "id": "0011",
-      "title": "Factories, Options & Small Helpers",
-      "summary": "Lightweight helpers for lazy factories and reusable CLI option builders used by isabl-cli commands.",
-      "children": [
-        {
-          "id": "0011.0001",
-          "title": "Factories",
-          "summary": "Factory accessors used to lazily obtain collections such as projects.",
-          "children": [],
-          "documents": [
-            "isabl_cli/isabl_cli/factories.py:projects"
-          ]
-        },
-        {
-          "id": "0011.0002",
-          "title": "CLI Option Builders",
-          "summary": "Factories for Click options to standardize analysis filters and dependency resolution from CLI inputs.",
-          "children": [],
-          "documents": [
-            "isabl_cli/isabl_cli/options.py:get_analyses_filters_option",
-            "isabl_cli/isabl_cli/options.py:get_dependency_analyses_option"
           ]
         }
       ],

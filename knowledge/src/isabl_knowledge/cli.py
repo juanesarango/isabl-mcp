@@ -110,6 +110,7 @@ def publish(ctx, data_dir: Path, output_dir: Path):
     """Render and publish the knowledge tree."""
     from isabl_knowledge.models import Document, TreeNode
     from isabl_knowledge.renderers.github_repo import render_tree_to_repo
+    from isabl_knowledge.renderers.mermaid import render_tree_to_mermaid
 
     tree_file = output_dir / "tree.json"
     docs_file = data_dir / "documents.json"
@@ -130,6 +131,12 @@ def publish(ctx, data_dir: Path, output_dir: Path):
     site_dir = output_dir / "site"
     click.echo(f"Rendering tree to {site_dir}...")
     render_tree_to_repo(tree_node, docs, site_dir)
+
+    # Generate mermaid visualization
+    mermaid_md = output_dir / "TREE.md"
+    mermaid_md.write_text(f"# Isabl Knowledge Tree\n\n{render_tree_to_mermaid(tree_node)}\n")
+    click.echo(f"Mermaid tree saved to {mermaid_md}")
+
     click.echo(f"Site rendered to {site_dir}")
 
 

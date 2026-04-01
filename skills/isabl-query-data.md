@@ -21,6 +21,12 @@ Work through these steps systematically:
 6. [ ] **Execute and verify results**
 7. [ ] **Format output** as needed (DataFrame, JSON, etc.)
 8. [ ] **When showing IDs for experiments/samples/individuals, prefer `system_id`** (or `identifier` if `system_id` is not available); avoid `pk` unless explicitly requested
+9. [ ] **For analysis summaries, choose scope-aware identifiers**:
+       - `individual_level_analysis` -> show individual `system_id` (e.g., `IID_H210514`)
+       - `project_level_analysis` -> show project `pk`
+       - avoid listing long `targets`/`references` experiment arrays unless explicitly requested
+10. [ ] **When building frontend links from `ISABL_API_URL`, remove `/api/v1/`** before appending query params (e.g., `?analysis=<pk>`)
+11. [ ] **Before any table, add a one-line plain-language summary** of what the table contains (scope, filters, and count if known)
 
 ## Step 1: Understand the Query Goal
 
@@ -133,6 +139,22 @@ isabl_query(
     output_fields=["system_id"]
 )
 ```
+
+### Analysis scope convention (important)
+
+When listing analyses, use identifiers that match the analysis scope:
+
+- For individual-level analyses (for example `WGTS_REPORT`), display the individual id (`IID_H...`).
+- For project-level analyses, display the project `pk`.
+- Do not show large `targets`/`references` experiment lists unless the user asks for them.
+
+### Table response convention (important)
+
+Before rendering a table, include one concise summary line that states what is being shown.
+
+Examples:
+- "Showing 3 failed WGTS_REPORT analyses in project 267, with individual IDs and stderr links."
+- "Showing the latest 10 succeeded MUTECT analyses with target experiment IDs."
 
 ### Find successful analyses for an application
 

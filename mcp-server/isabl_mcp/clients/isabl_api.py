@@ -159,10 +159,12 @@ class IsablAPIClient:
         """
         Build analysis browse URL from ISABL_API_URL.
 
-        Example: http://localhost:8000/api/v1/?analysis=123
+        Example: http://localhost:8000/?analysis=123
         """
-        api_base = f"{self.base_url}/"
-        return f"{api_base}?analysis={analysis_pk}"
+        frontend_base = self.base_url.rstrip("/")
+        if frontend_base.endswith("/api/v1"):
+            frontend_base = frontend_base[: -len("/api/v1")]
+        return f"{frontend_base}/?analysis={analysis_pk}"
 
     async def get_instance(
         self,

@@ -93,6 +93,8 @@ def register_data_tools(mcp: FastMCP, client: IsablAPIClient) -> None:
             limit: Maximum results per page while paginating (default 100)
             output_fields: Optional projected fields in final output. Supports dotted
                           paths (e.g., "application.name") and "url" for analyses.
+                          The "url" field is a frontend link derived from ISABL_API_URL
+                          by removing "/api/v1/" and appending "?analysis=<pk>".
             output_format: "json" (default), "table", or "csv"
             max_results: Optional cap for total returned rows across all pages
 

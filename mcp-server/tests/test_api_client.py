@@ -269,7 +269,7 @@ class TestIsablAPIClientQuery:
         """Test analysis browse URL is derived from ISABL_API_URL."""
         assert (
             api_client.analysis_browse_url(518730)
-            == "https://test.isabl.io/api/v1/?analysis=518730"
+            == "https://test.isabl.io/?analysis=518730"
         )
 
 

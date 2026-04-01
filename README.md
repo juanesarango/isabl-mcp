@@ -7,21 +7,23 @@
 
 ## Install
 
-### Claude Code (plugin — MCP + skills in one step)
+### Claude Code (recommended — gets everything)
 
 ```bash
 /plugin install github:juanesarango/isabl-skills
 ```
 
-This installs **everything**: 11 MCP tools + 8 guided skills. Credentials are auto-discovered from `~/.isabl/settings.json` (the standard `isabl_cli` config).
+Installs the **plugin**, which bundles the MCP server (11 tools) + 8 guided skills as `/isabl-*` slash commands. Credentials are auto-discovered from `~/.isabl/settings.json`.
 
-### Claude Code (MCP only)
+### Claude Code (MCP only, no skills)
 
 ```bash
 claude mcp add isabl -- uvx isabl-mcp
 ```
 
-### Cursor (one click)
+Adds only the MCP server. You get the 11 tools but not the guided skill workflows.
+
+### Cursor
 
 Click the badge above, or add to `.cursor/mcp.json`:
 
@@ -40,16 +42,26 @@ Click the badge above, or add to `.cursor/mcp.json`:
 }
 ```
 
-### pip / uvx
+Cursor gets the 11 MCP tools. Skills are not available in Cursor (they're a Claude Code feature).
+
+### Other MCP clients / standalone
 
 ```bash
-# Run directly (no install needed)
-uvx isabl-mcp
-
-# Or install globally
-pip install isabl-mcp
-isabl-mcp
+uvx isabl-mcp        # run directly, no install needed
+pip install isabl-mcp # or install globally
 ```
+
+Works with any MCP-compatible client (Windsurf, Zed, Claude Desktop, etc.).
+
+## What's included
+
+| Component | Claude Code Plugin | MCP only (Cursor, etc.) |
+|-----------|-------------------|------------------------|
+| 11 MCP tools (query, debug, search) | Yes | Yes |
+| 8 MCP prompts (guided workflows) | Yes | Yes (client support varies) |
+| 8 skills (`/isabl-*` slash commands) | Yes | No (Claude Code only) |
+| Knowledge base (289+ docs) | Yes | Yes |
+| Auto-discover credentials | Yes | Yes |
 
 ## Credentials
 
@@ -94,19 +106,9 @@ Env vars always take precedence over the settings file.
 | `get_knowledge_tree` | Browse the hierarchical knowledge tree |
 | `get_knowledge_doc` | Get full content of any knowledge base document |
 
-## How it works
+## Skills (8) — Claude Code only
 
-```
-You (plain English) --> AI Assistant --> MCP Server --> Isabl API --> Your data
-                                    |
-                                    +--> Knowledge Base --> Platform docs & code
-```
-
-The AI assistant uses the MCP tools to query your Isabl instance in real time, and the built-in knowledge base to understand Isabl concepts, API patterns, and best practices.
-
-## Skills (8)
-
-Skills are guided multi-step workflows for common Isabl tasks. They're included automatically with the plugin install, or can be installed standalone:
+Skills are guided multi-step workflows available as `/isabl-*` slash commands. They're included with the plugin install, or can be installed standalone:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/juanesarango/isabl-skills/main/scripts/install.sh | bash
@@ -122,6 +124,16 @@ curl -fsSL https://raw.githubusercontent.com/juanesarango/isabl-skills/main/scri
 | `/isabl-submit-data` | Submit new sequencing data |
 | `/isabl-project-report` | Generate project status reports |
 | `/isabl-run-pipeline` | Run multiple apps as pipeline |
+
+## How it works
+
+```
+You (plain English) --> AI Assistant --> MCP Server --> Isabl API --> Your data
+                                    |
+                                    +--> Knowledge Base --> Platform docs & code
+```
+
+The AI assistant uses the MCP tools to query your Isabl instance in real time, and the built-in knowledge base to understand Isabl concepts, API patterns, and best practices.
 
 ## Knowledge Tree
 
@@ -143,7 +155,8 @@ The knowledge base is built from 289+ documents extracted from Isabl's source co
 ```bash
 cd mcp-server
 uv sync --dev
-uv run pytest              # 169 tests
+uv run pytest              # 179 tests
+uv run mcp dev isabl_mcp/server.py  # test with MCP Inspector
 uv run isabl-mcp           # start server locally
 ```
 

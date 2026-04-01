@@ -1,11 +1,17 @@
-# Isabl Skills
+---
+description: 
+alwaysApply: true
+---
 
-Claude Code skills and MCP server for the Isabl genomics platform.
+# Isabl MCP Server
+
+MCP server and Claude Code skills for the Isabl genomics platform.
 
 ## What This Repo Contains
 
+- `mcp-server/` - MCP server with 11 tools + 8 prompts for Isabl API and knowledge base
 - `skills/` - 8 Claude Code skills for guided Isabl workflows
-- `mcp-server/` - MCP server with 9 tools for Isabl API access
+- `knowledge/` - Knowledge tree pipeline (347 docs from Isabl source, docs, API specs)
 - `dev/` - Development notes and reference documentation
 
 ## Quick Reference

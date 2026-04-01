@@ -1,5 +1,12 @@
 #!/bin/bash
-# Install Isabl skills for Claude Code
+# Install Isabl skills for Claude Code (standalone)
+#
+# Preferred method: /plugin install github:juanesarango/isabl-skills
+#   (installs MCP server + skills together)
+#
+# This script installs skills only. For MCP tools, also run:
+#   claude mcp add isabl -- uvx isabl-mcp
+#
 # Usage: curl -fsSL https://raw.githubusercontent.com/juanesarango/isabl-skills/main/scripts/install.sh | bash
 
 set -e

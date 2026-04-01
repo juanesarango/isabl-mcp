@@ -1,7 +1,6 @@
 # Isabl MCP Server
 
 [![CI](https://github.com/juanesarango/isabl-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/juanesarango/isabl-skills/actions/workflows/ci.yml)
-[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name=isabl&config=eyJjb21tYW5kIjogInV2eCIsICJhcmdzIjogWyJpc2FibC1tY3AiXSwgImVudiI6IHsiSVNBQkxfQVBJX1VSTCI6ICJodHRwczovL3lvdXItaXNhYmwtaW5zdGFuY2UuY29tL2FwaS92MS8iLCAiSVNBQkxfQVBJX1RPS0VOIjogInlvdXItdG9rZW4taGVyZSJ9fQ%3D%3D)
 
 > Talk to your genomics data. MCP server + knowledge base for the [Isabl](https://docs.isabl.io) platform.
 
@@ -24,6 +23,8 @@ claude mcp add isabl -- uvx isabl-mcp
 Adds only the MCP server. You get the 11 tools but not the guided skill workflows.
 
 ### Cursor
+
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name=isabl&config=eyJjb21tYW5kIjogInV2eCIsICJhcmdzIjogWyJpc2FibC1tY3AiXSwgImVudiI6IHsiSVNBQkxfQVBJX1VSTCI6ICJodHRwczovL3lvdXItaXNhYmwtaW5zdGFuY2UuY29tL2FwaS92MS8iLCAiSVNBQkxfQVBJX1RPS0VOIjogInlvdXItdG9rZW4taGVyZSJ9fQ%3D%3D)
 
 Click the badge above, or add to `.cursor/mcp.json`:
 
@@ -60,7 +61,7 @@ Works with any MCP-compatible client (Windsurf, Zed, Claude Desktop, etc.).
 | 11 MCP tools (query, debug, search) | Yes | Yes |
 | 8 MCP prompts (guided workflows) | Yes | Yes (client support varies) |
 | 8 skills (`/isabl-*` slash commands) | Yes | No (Claude Code only) |
-| Knowledge base (289+ docs) | Yes | Yes |
+| Knowledge base (347 docs) | Yes | Yes |
 | Auto-discover credentials | Yes | Yes |
 
 ## Credentials
@@ -102,7 +103,7 @@ Env vars always take precedence over the settings file.
 | `get_app_template` | Generate boilerplate code for a new application |
 | `merge_results` | Collect and preview result files across multiple analyses |
 | `project_summary` | Get project stats: experiment counts, analysis breakdown |
-| `search_knowledge` | Search 289+ docs from Isabl's code, docs, and API specs |
+| `search_knowledge` | Search 347 docs from Isabl's code, docs, and API specs |
 | `get_knowledge_tree` | Browse the hierarchical knowledge tree |
 | `get_knowledge_doc` | Get full content of any knowledge base document |
 
@@ -137,7 +138,7 @@ The AI assistant uses the MCP tools to query your Isabl instance in real time, a
 
 ## Knowledge Tree
 
-The knowledge base is built from 289+ documents extracted from Isabl's source code, documentation, and API specifications. Browse the interactive visualization:
+The knowledge base is built from 347 documents extracted from Isabl's source code, documentation, and API specifications. Browse the interactive visualization:
 
 [**Explore the Knowledge Tree**](https://juanesarango.github.io/isabl-skills)
 

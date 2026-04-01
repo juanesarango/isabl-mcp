@@ -66,7 +66,9 @@ def create_server() -> FastMCP:
 
     # Register knowledge base tools (uses bundled data)
     logger.info("Registering knowledge tools...")
-    register_knowledge_tools(mcp)
+    knowledge_index = register_knowledge_tools(mcp)
+    if knowledge_index is None:
+        logger.warning("Knowledge base data not found — knowledge tools not available")
 
     # Register prompts (guided workflows)
     logger.info("Registering prompts...")

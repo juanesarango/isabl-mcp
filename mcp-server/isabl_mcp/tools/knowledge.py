@@ -108,7 +108,7 @@ def register_knowledge_tools(mcp: FastMCP) -> Optional[KnowledgeIndex]:
         """
         Search the Isabl knowledge base for documentation, code patterns, and API references.
 
-        Searches across 289+ documents extracted from Isabl's source code, documentation,
+        Searches across 347 documents extracted from Isabl's source code, documentation,
         and API specifications. Matches against titles, summaries, tags, and content.
 
         Args:

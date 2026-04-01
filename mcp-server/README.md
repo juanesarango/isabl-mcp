@@ -3,7 +3,7 @@
 MCP server providing AI agents access to the Isabl genomics platform.
 
 11 tools for querying data, searching applications, aggregating results,
-and searching the built-in knowledge base (289+ documents from Isabl's
+and searching the built-in knowledge base (347 documents from Isabl's
 source code, documentation, and API specs).
 
 ## Quick Start
@@ -53,6 +53,13 @@ isabl_query(
 )
 ```
 
+For analysis summaries:
+
+- If analysis is `individual_level_analysis`, show individual `system_id` (for example `IID_H210514`) instead of long targets/references experiment lists.
+- If analysis is `project_level_analysis`, show project `pk` instead of long targets/references experiment lists.
+- Build frontend links from `ISABL_API_URL` by removing `/api/v1/` and adding query params (for example `?analysis=<pk>`).
+- Before displaying a table, include a one-line summary of what the table shows (scope, filters, and count when available).
+
 ### Applications
 
 | Tool | Description |
@@ -71,7 +78,7 @@ isabl_query(
 
 | Tool | Description |
 |------|-------------|
-| `search_knowledge` | Search 289+ docs by keyword |
+| `search_knowledge` | Search 347 docs by keyword |
 | `get_knowledge_tree` | Browse the knowledge tree hierarchy |
 | `get_knowledge_doc` | Get full content of a document |
 

@@ -47,13 +47,25 @@ Common error patterns:
         if project_id:
             project_filter = f', filters={{"projects": {project_id}}}'
 
+        # Pick the right identifier field for the endpoint
+        id_fields = {
+            "experiments": "system_id",
+            "individuals": "system_id",
+            "samples": "system_id",
+            "analyses": "pk",
+            "projects": "pk",
+            "applications": "pk",
+            "techniques": "pk",
+        }
+        id_field = id_fields.get(entity_type, "pk")
+
         return [
             UserMessage(f"""Help me query {entity_type} from Isabl.
 
 Use the isabl_query tool to search. Available endpoints: experiments, analyses, projects, individuals, samples, applications, techniques.
 
 Start with:
-  isabl_query(endpoint="{entity_type}"{project_filter}, output_fields=["system_id", "status"])
+  isabl_query(endpoint="{entity_type}"{project_filter}, output_fields=["{id_field}", "status"])
 
 Common filter patterns:
 - By project: {{"projects": 102}}
@@ -62,7 +74,9 @@ Common filter patterns:
 - By date: {{"created__gte": "2024-01-01"}}
 - By technique: {{"technique__method": "WGS"}}
 
-When showing IDs, prefer system_id over pk for readability."""),
+ID conventions:
+- experiments, individuals, samples: use system_id
+- analyses, projects, applications: use pk"""),
         ]
 
     @mcp.prompt()

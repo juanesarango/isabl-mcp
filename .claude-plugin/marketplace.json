@@ -1,0 +1,14 @@
+{
+  "name": "isabl-marketplace",
+  "owner": {
+    "name": "Isabl Team"
+  },
+  "plugins": [
+    {
+      "name": "isabl",
+      "source": ".",
+      "description": "MCP server for the Isabl genomics platform. Query experiments, analyses, results, and search the Isabl knowledge base.",
+      "version": "0.2.0"
+    }
+  ]
+}

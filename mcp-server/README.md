@@ -2,182 +2,78 @@
 
 MCP server providing AI agents access to the Isabl genomics platform.
 
-## Requirements
+11 tools for querying data, searching applications, aggregating results,
+and searching the built-in knowledge base (289+ documents from Isabl's
+source code, documentation, and API specs).
 
-- Python 3.10 or higher (required by the MCP SDK)
-
-## Installation
+## Quick Start
 
 ```bash
-cd mcp-server
-pip install -e .
+# Run directly with uvx (no install needed)
+uvx isabl-mcp
+
+# Or install with pip
+pip install isabl-mcp
+isabl-mcp
 ```
 
-Or with uv:
+Set your credentials:
 
 ```bash
-cd mcp-server
-uv pip install -e .
-```
-
-## Configuration
-
-Set environment variables:
-
-```bash
-export ISABL_API_URL="https://api.isabl.io/api/v1/"
+export ISABL_API_URL="https://your-isabl-instance.com/api/v1/"
 export ISABL_API_TOKEN="your-token-here"
 ```
 
-Or create a `.env` file:
+## Tools (11)
 
-```
-ISABL_API_URL=https://api.isabl.io/api/v1/
-ISABL_API_TOKEN=your-token-here
-```
-
-## Usage
-
-### Run directly
-
-```bash
-python -m isabl_mcp.server
-```
-
-### Claude Code Integration
-
-Add to your Claude Code MCP settings (`~/.claude/settings.json`):
-
-```json
-{
-  "mcpServers": {
-    "isabl": {
-      "command": "python",
-      "args": ["-m", "isabl_mcp.server"],
-      "env": {
-        "ISABL_API_URL": "https://api.isabl.io/api/v1/",
-        "ISABL_API_TOKEN": "${ISABL_TOKEN}"
-      }
-    }
-  }
-}
-```
-
-### Cursor Integration
-
-Add to your Cursor settings:
-
-```json
-{
-  "mcp": {
-    "servers": {
-      "isabl": {
-        "command": "python",
-        "args": ["-m", "isabl_mcp.server"]
-      }
-    }
-  }
-}
-```
-
-## Tools
-
-### Data Access (4)
+### Data Access
 
 | Tool | Description |
 |------|-------------|
-| `isabl_query` | Query any API endpoint with filters |
-| `isabl_get_tree` | Get individual → samples → experiments hierarchy |
+| `isabl_query` | Query any API endpoint with Django-style filters |
+| `isabl_get_tree` | Get individual -> samples -> experiments hierarchy |
 | `isabl_get_results` | Get result files from an analysis |
 | `isabl_get_logs` | Get execution logs (stdout, stderr, script) |
 
-### Applications (2)
+### Applications
 
 | Tool | Description |
 |------|-------------|
-| `get_apps` | Search apps and get details (use `detailed=True` for full info) |
-| `get_app_template` | Get boilerplate code for new app |
+| `get_apps` | Search apps and get details (`detailed=True` for full info) |
+| `get_app_template` | Get boilerplate code for new apps |
 
-### Aggregation (2)
+### Aggregation
 
 | Tool | Description |
 |------|-------------|
 | `merge_results` | Combine results from multiple analyses |
 | `project_summary` | Get project statistics |
 
-## Examples
+### Knowledge Base
 
-### Query failed analyses
+| Tool | Description |
+|------|-------------|
+| `search_knowledge` | Search 289+ docs by keyword |
+| `get_knowledge_tree` | Browse the knowledge tree hierarchy |
+| `get_knowledge_doc` | Get full content of a document |
 
-```
-isabl_query("analyses", {"projects": 102, "status": "FAILED"})
-```
+## Configuration
 
-### Get analysis logs for debugging
-
-```
-isabl_get_logs(12345, log_type="stderr", tail_lines=50)
-```
-
-### Search for apps
-
-```
-get_apps("fusion")
-get_apps("MUTECT", detailed=True)  # Get full details
-```
-
-### Get project overview
-
-```
-project_summary(102)
-```
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `ISABL_API_URL` | Isabl API base URL | `http://localhost:8000/api/v1/` |
+| `ISABL_API_TOKEN` | API authentication token | (none) |
+| `ISABL_VERIFY_SSL` | Verify SSL certificates | `true` |
+| `ISABL_TIMEOUT` | HTTP timeout in seconds | `30` |
 
 ## Development
 
-### Run tests
-
 ```bash
-pytest tests/
+uv sync --dev
+uv run pytest        # 150 tests
+uv run isabl-mcp     # start server
 ```
 
-### Local development with hot reload
+## License
 
-```bash
-python -m isabl_mcp.server
-```
-
-### Testing with local API
-
-1. Start the local Isabl API (using Podman):
-
-```bash
-cd ~/isabl/isabl_api && podman compose up -d
-```
-
-2. Get an API token from the database:
-
-```bash
-podman exec isabl_demo-postgres-1 psql -U postgres -d isabl_demo -c \
-  "SELECT t.key, u.username FROM authtoken_token t JOIN auth_user u ON t.user_id = u.id;"
-```
-
-3. Test the MCP server tools:
-
-```bash
-export ISABL_API_URL="http://localhost:8000/api/v1"
-export ISABL_API_TOKEN="your-token-here"
-source .venv/bin/activate
-python -c "
-import asyncio
-from isabl_mcp.server import create_server
-
-async def test():
-    mcp = create_server()
-    tools = mcp._tool_manager._tools
-    print('Tools:', list(tools.keys()))
-    result = await tools['isabl_query'].fn(endpoint='projects', filters={}, limit=3)
-    print('Projects count:', result.get('count'))
-
-asyncio.run(test())
-"
-```
+MIT

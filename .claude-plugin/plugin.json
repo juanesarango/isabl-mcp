@@ -1,0 +1,9 @@
+{
+  "name": "isabl",
+  "description": "MCP server for the Isabl genomics platform. Query experiments, analyses, results, and search the Isabl knowledge base.",
+  "version": "0.2.0",
+  "author": {
+    "name": "Isabl Team",
+    "email": "support@isabl.io"
+  }
+}

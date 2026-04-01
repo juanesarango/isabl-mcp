@@ -35,6 +35,7 @@ from isabl_mcp.tools.data import register_data_tools
 from isabl_mcp.tools.apps import register_app_tools
 from isabl_mcp.tools.aggregation import register_aggregation_tools
 from isabl_mcp.tools.knowledge import register_knowledge_tools
+from isabl_mcp.prompts import register_prompts
 
 
 # Configure logging
@@ -66,6 +67,10 @@ def create_server() -> FastMCP:
     # Register knowledge base tools (uses bundled data)
     logger.info("Registering knowledge tools...")
     register_knowledge_tools(mcp)
+
+    # Register prompts (guided workflows)
+    logger.info("Registering prompts...")
+    register_prompts(mcp)
 
     logger.info(
         f"Isabl MCP Server initialized. API URL: {settings.isabl_api_url}"

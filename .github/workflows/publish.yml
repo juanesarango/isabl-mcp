@@ -1,8 +1,11 @@
 name: Publish to PyPI
 
+# Disabled until PyPI account is recovered
+# on:
+#   release:
+#     types: [published]
+#   workflow_dispatch:
 on:
-  release:
-    types: [published]
   workflow_dispatch:
 
 jobs:

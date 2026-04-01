@@ -34,7 +34,6 @@
 ## Installation
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/juanesarango/isabl-skills/main/scripts/install.sh | bash
+# Recommended: install as Claude Code plugin (gets MCP + skills)
+/plugin install github:juanesarango/isabl-skills
 ```
-
-Skills install to `~/.claude/skills/isabl/`.

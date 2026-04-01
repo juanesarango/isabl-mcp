@@ -12,7 +12,7 @@ MCP server and Claude Code skills for the Isabl genomics platform.
 - `mcp-server/` - MCP server with 11 tools + 8 prompts for Isabl API and knowledge base
 - `skills/` - 8 Claude Code skills for guided Isabl workflows
 - `knowledge/` - Knowledge tree pipeline (347 docs from Isabl source, docs, API specs)
-- `dev/` - Development notes and reference documentation
+- `dev/` - Reference documentation for external Isabl repos
 
 ## Quick Reference
 
@@ -50,11 +50,11 @@ for a in analyses:
 ## Development Commands
 
 ```bash
-# Install skills locally
-./scripts/install.sh
-
 # Run MCP server tests
 cd mcp-server && uv run pytest
+
+# Lint
+cd mcp-server && uv run ruff check isabl_mcp/
 
 # Start local API (requires podman)
 cd ~/isabl/isabl_api && podman compose up -d

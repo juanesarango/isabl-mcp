@@ -109,11 +109,7 @@ Env vars always take precedence over the settings file.
 
 ## Skills (8) — Claude Code only
 
-Skills are guided multi-step workflows available as `/isabl-*` slash commands. They're included with the plugin install, or can be installed standalone:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/juanesarango/isabl-skills/main/scripts/install.sh | bash
-```
+Skills are guided multi-step workflows available as `/isabl-*` slash commands. Included automatically with the plugin install.
 
 | Skill | Purpose |
 |-------|---------|
@@ -157,9 +153,17 @@ The knowledge base is built from 347 documents extracted from Isabl's source cod
 cd mcp-server
 uv sync --dev
 uv run pytest              # 179 tests
+uv run ruff check isabl_mcp/  # lint
 uv run mcp dev isabl_mcp/server.py  # test with MCP Inspector
 uv run isabl-mcp           # start server locally
 ```
+
+### Contributing
+
+1. Add tools in `mcp-server/isabl_mcp/tools/`, register in `server.py`, add tests
+2. Add skills as `skills/isabl-*.md` (YAML frontmatter + workflow steps)
+3. Use `ruff` for linting, type hints for Python
+4. Submit a PR
 
 ## Related
 

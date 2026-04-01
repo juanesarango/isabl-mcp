@@ -35,6 +35,24 @@ export ISABL_API_TOKEN="your-token-here"
 | `isabl_get_results` | Get result files from an analysis |
 | `isabl_get_logs` | Get execution logs (stdout, stderr, script) |
 
+### Query output convention
+
+For experiment/sample/individual queries, use a human-readable identifier by default:
+
+- Prefer `["system_id"]` for experiments
+- Use `["identifier"]` when `system_id` is not available
+- Include `pk` only when explicitly requested
+
+Example:
+
+```python
+isabl_query(
+    endpoint="experiments",
+    filters={"projects": 102},
+    output_fields=["system_id"]
+)
+```
+
 ### Applications
 
 | Tool | Description |

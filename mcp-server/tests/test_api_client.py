@@ -205,6 +205,73 @@ class TestIsablAPIClientQuery:
             with pytest.raises(httpx.HTTPStatusError):
                 await api_client.query("invalid_endpoint")
 
+    @pytest.mark.asyncio
+    async def test_query_all_transparent_pagination(self, api_client):
+        """Test query_all fetches all pages transparently."""
+        with patch.object(api_client, "query", new_callable=AsyncMock) as mock_query:
+            mock_query.side_effect = [
+                {
+                    "count": 3,
+                    "next": "https://test.isabl.io/api/v1/analyses?limit=2&offset=2",
+                    "results": [{"pk": 1}, {"pk": 2}],
+                },
+                {
+                    "count": 3,
+                    "next": None,
+                    "results": [{"pk": 3}],
+                },
+            ]
+
+            result = await api_client.query_all("analyses", limit=2)
+
+            assert result["count"] == 3
+            assert result["next"] is None
+            assert result["results"] == [{"pk": 1}, {"pk": 2}, {"pk": 3}]
+            assert mock_query.await_count == 2
+            mock_query.assert_any_await(
+                "analyses",
+                filters=None,
+                fields=None,
+                limit=2,
+                offset=0,
+            )
+            mock_query.assert_any_await(
+                "analyses",
+                filters=None,
+                fields=None,
+                limit=2,
+                offset=2,
+            )
+
+    @pytest.mark.asyncio
+    async def test_query_all_respects_max_results(self, api_client):
+        """Test query_all stops once max_results is reached."""
+        with patch.object(api_client, "query", new_callable=AsyncMock) as mock_query:
+            mock_query.side_effect = [
+                {
+                    "count": 10,
+                    "next": "https://test.isabl.io/api/v1/analyses?limit=5&offset=5",
+                    "results": [{"pk": i} for i in range(5)],
+                },
+                {
+                    "count": 10,
+                    "next": None,
+                    "results": [{"pk": i} for i in range(5, 10)],
+                },
+            ]
+
+            result = await api_client.query_all("analyses", limit=5, max_results=6)
+
+            assert len(result["results"]) == 6
+            assert result["has_more"] is True
+
+    def test_analysis_browse_url_uses_api_base(self, api_client):
+        """Test analysis browse URL is derived from ISABL_API_URL."""
+        assert (
+            api_client.analysis_browse_url(518730)
+            == "https://test.isabl.io/api/v1/?analysis=518730"
+        )
+
 
 class TestIsablAPIClientGetInstance:
     """Tests for the get_instance method."""

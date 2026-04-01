@@ -48,7 +48,7 @@ class TestQueryAndResultsWorkflow:
     ):
         """Test querying for analyses then getting results."""
         # Step 1: Query for succeeded analyses
-        mock_client.query.return_value = {
+        mock_client.query_all.return_value = {
             "count": 2,
             "next": None,
             "results": sample_analyses_list[:2],  # Two SUCCEEDED analyses
@@ -81,7 +81,7 @@ class TestQueryAndResultsWorkflow:
     ):
         """Test querying for failed analyses then getting logs."""
         # Query for failed analyses
-        mock_client.query.return_value = {
+        mock_client.query_all.return_value = {
             "count": 1,
             "next": None,
             "results": [sample_analyses_list[2]],  # The FAILED analysis
@@ -125,7 +125,7 @@ class TestQueryAndResultsWorkflow:
                 experiment_pks.append(exp["pk"])
 
         # Query analyses for these experiments
-        mock_client.query.return_value = {
+        mock_client.query_all.return_value = {
             "count": 5,
             "next": None,
             "results": [
@@ -360,7 +360,7 @@ class TestEdgeCases:
     @pytest.mark.asyncio
     async def test_query_with_complex_filters(self, mock_client, all_tools):
         """Test query with complex nested filters."""
-        mock_client.query.return_value = {"count": 0, "results": []}
+        mock_client.query_all.return_value = {"count": 0, "results": []}
 
         await all_tools["isabl_query"](
             "experiments",
@@ -373,7 +373,7 @@ class TestEdgeCases:
             }
         )
 
-        call_args = mock_client.query.call_args
+        call_args = mock_client.query_all.call_args
         filters = call_args[1]["filters"]
         assert filters["technique__method"] == "WGS"
         assert filters["sample__category"] == "TUMOR"
@@ -381,7 +381,7 @@ class TestEdgeCases:
     @pytest.mark.asyncio
     async def test_query_with_special_characters(self, mock_client, all_tools):
         """Test query handles special characters in filters."""
-        mock_client.query.return_value = {"count": 0, "results": []}
+        mock_client.query_all.return_value = {"count": 0, "results": []}
 
         # Query with identifier that might have special characters
         await all_tools["isabl_query"](
@@ -389,7 +389,7 @@ class TestEdgeCases:
             filters={"identifier": "PATIENT-001_v2"}
         )
 
-        call_args = mock_client.query.call_args
+        call_args = mock_client.query_all.call_args
         assert call_args[1]["filters"]["identifier"] == "PATIENT-001_v2"
 
     @pytest.mark.asyncio
@@ -457,12 +457,12 @@ class TestEdgeCases:
     @pytest.mark.asyncio
     async def test_zero_limit_query(self, mock_client, all_tools):
         """Test query with zero limit still works."""
-        mock_client.query.return_value = {"count": 100, "results": []}
+        mock_client.query_all.return_value = {"count": 100, "results": []}
 
         result = await all_tools["isabl_query"]("experiments", limit=0)
 
         # Should still make the call
-        mock_client.query.assert_called_once()
+        mock_client.query_all.assert_called_once()
 
     @pytest.mark.asyncio
     async def test_large_analysis_id(self, mock_client, all_tools):

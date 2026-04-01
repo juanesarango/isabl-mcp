@@ -20,6 +20,7 @@ Work through these steps systematically:
 5. [ ] **Build the query** using ii.get_* functions
 6. [ ] **Execute and verify results**
 7. [ ] **Format output** as needed (DataFrame, JSON, etc.)
+8. [ ] **When showing IDs for experiments/samples/individuals, prefer `system_id`** (or `identifier` if `system_id` is not available); avoid `pk` unless explicitly requested
 
 ## Step 1: Understand the Query Goal
 
@@ -109,6 +110,28 @@ experiments = ii.get_experiments(
 )
 for exp in experiments:
     print(f"{exp.system_id}: {exp.sample.identifier}")
+```
+
+### ID display convention (important)
+
+When users ask for an experiment/sample/individual "ID", prefer the human-readable identifier (`system_id` or `identifier`) and omit numeric `pk` unless asked.
+
+```python
+import isabl_cli as ii
+
+experiments = ii.get_experiments(projects=102, fields=["system_id", "sample"])
+for exp in experiments:
+    print(f"experiment_id={exp.system_id}")
+```
+
+For MCP `isabl_query`, prefer:
+
+```python
+isabl_query(
+    endpoint="experiments",
+    filters={"projects": 102},
+    output_fields=["system_id"]
+)
 ```
 
 ### Find successful analyses for an application

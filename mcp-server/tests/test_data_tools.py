@@ -47,7 +47,7 @@ class TestIsablQuery:
     @pytest.mark.asyncio
     async def test_query_basic(self, mock_client, isabl_query):
         """Test basic query returns formatted results."""
-        mock_client.query.return_value = {
+        mock_client.query_all.return_value = {
             "count": 5,
             "next": None,
             "results": [{"pk": i} for i in range(5)],
@@ -55,11 +55,12 @@ class TestIsablQuery:
 
         result = await isabl_query("experiments")
 
-        mock_client.query.assert_called_once_with(
+        mock_client.query_all.assert_called_once_with(
             endpoint="experiments",
             filters={},
             fields=None,
             limit=100,
+            max_results=None,
         )
         assert result["count"] == 5
         assert len(result["results"]) == 5
@@ -68,7 +69,7 @@ class TestIsablQuery:
     @pytest.mark.asyncio
     async def test_query_with_filters(self, mock_client, isabl_query):
         """Test query with filters."""
-        mock_client.query.return_value = {
+        mock_client.query_all.return_value = {
             "count": 2,
             "next": None,
             "results": [{"pk": 1}, {"pk": 2}],
@@ -79,18 +80,19 @@ class TestIsablQuery:
             filters={"status": "FAILED", "projects": 102}
         )
 
-        mock_client.query.assert_called_once_with(
+        mock_client.query_all.assert_called_once_with(
             endpoint="analyses",
             filters={"status": "FAILED", "projects": 102},
             fields=None,
             limit=100,
+            max_results=None,
         )
         assert result["count"] == 2
 
     @pytest.mark.asyncio
     async def test_query_with_fields(self, mock_client, isabl_query):
         """Test query with field selection."""
-        mock_client.query.return_value = {
+        mock_client.query_all.return_value = {
             "count": 1,
             "next": None,
             "results": [{"pk": 1, "results": {}}],
@@ -101,44 +103,46 @@ class TestIsablQuery:
             fields=["pk", "results"]
         )
 
-        mock_client.query.assert_called_once_with(
+        mock_client.query_all.assert_called_once_with(
             endpoint="analyses",
             filters={},
             fields=["pk", "results"],
             limit=100,
+            max_results=None,
         )
 
     @pytest.mark.asyncio
     async def test_query_with_limit(self, mock_client, isabl_query):
         """Test query with custom limit."""
-        mock_client.query.return_value = {"count": 50, "next": None, "results": []}
+        mock_client.query_all.return_value = {"count": 50, "next": None, "results": []}
 
         await isabl_query("experiments", limit=50)
 
-        mock_client.query.assert_called_once_with(
+        mock_client.query_all.assert_called_once_with(
             endpoint="experiments",
             filters={},
             fields=None,
             limit=50,
+            max_results=None,
         )
 
     @pytest.mark.asyncio
     async def test_query_has_more_pagination(self, mock_client, isabl_query):
         """Test query indicates when more results exist."""
-        mock_client.query.return_value = {
+        mock_client.query_all.return_value = {
             "count": 500,
-            "next": "https://api.isabl.io/api/v1/experiments?limit=100&offset=100",
+            "next": None,
             "results": [{"pk": i} for i in range(100)],
         }
 
         result = await isabl_query("experiments")
 
-        assert result["has_more"] is True
+        assert result["has_more"] is False
 
     @pytest.mark.asyncio
     async def test_query_empty_results(self, mock_client, isabl_query):
         """Test query with no results."""
-        mock_client.query.return_value = {
+        mock_client.query_all.return_value = {
             "count": 0,
             "next": None,
             "results": [],
@@ -153,16 +157,89 @@ class TestIsablQuery:
     @pytest.mark.asyncio
     async def test_query_none_filters_treated_as_empty(self, mock_client, isabl_query):
         """Test that None filters are treated as empty dict."""
-        mock_client.query.return_value = {"count": 0, "results": []}
+        mock_client.query_all.return_value = {"count": 0, "results": []}
 
         await isabl_query("experiments", filters=None)
 
-        mock_client.query.assert_called_once_with(
+        mock_client.query_all.assert_called_once_with(
             endpoint="experiments",
             filters={},
             fields=None,
             limit=100,
+            max_results=None,
         )
+
+    @pytest.mark.asyncio
+    async def test_query_with_custom_output_fields_and_url(self, mock_client, isabl_query):
+        """Test projection with dotted fields and derived analysis URL."""
+        mock_client.query_all.return_value = {
+            "count": 1,
+            "next": None,
+            "results": [
+                {
+                    "pk": 518730,
+                    "status": "FAILED",
+                    "storage_url": "/work/isabl/analyses/518730",
+                    "application": {"name": "CONPAIR_INDIVIDUAL"},
+                }
+            ],
+        }
+        mock_client.analysis_browse_url = MagicMock(
+            return_value="http://localhost:8000/api/v1/?analysis=518730"
+        )
+
+        result = await isabl_query(
+            "analyses",
+            output_fields=["pk", "application.name", "status", "url", "storage_url"],
+        )
+
+        assert result["results"] == [
+            {
+                "pk": 518730,
+                "application.name": "CONPAIR_INDIVIDUAL",
+                "status": "FAILED",
+                "url": "http://localhost:8000/api/v1/?analysis=518730",
+                "storage_url": "/work/isabl/analyses/518730",
+            }
+        ]
+
+    @pytest.mark.asyncio
+    async def test_query_table_format(self, mock_client, isabl_query):
+        """Test markdown table formatting."""
+        mock_client.query_all.return_value = {
+            "count": 1,
+            "next": None,
+            "results": [{"pk": 1, "status": "FAILED"}],
+        }
+
+        result = await isabl_query(
+            "analyses",
+            output_fields=["pk", "status"],
+            output_format="table",
+        )
+
+        assert result["output_format"] == "table"
+        assert "| pk | status |" in result["output"]
+        assert "| 1 | FAILED |" in result["output"]
+
+    @pytest.mark.asyncio
+    async def test_query_csv_format(self, mock_client, isabl_query):
+        """Test CSV formatting."""
+        mock_client.query_all.return_value = {
+            "count": 1,
+            "next": None,
+            "results": [{"pk": 1, "status": "FAILED"}],
+        }
+
+        result = await isabl_query(
+            "analyses",
+            output_fields=["pk", "status"],
+            output_format="csv",
+        )
+
+        assert result["output_format"] == "csv"
+        assert "pk,status" in result["output"]
+        assert "1,FAILED" in result["output"]
 
 
 class TestIsablGetTree:

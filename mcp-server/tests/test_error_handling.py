@@ -181,7 +181,7 @@ class TestDataToolsErrorHandling:
     @pytest.mark.asyncio
     async def test_query_client_error_propagates(self, mock_client, data_tools):
         """Test that client errors propagate from query."""
-        mock_client.query.side_effect = Exception("API unavailable")
+        mock_client.query_all.side_effect = Exception("API unavailable")
 
         with pytest.raises(Exception) as exc_info:
             await data_tools["isabl_query"]("experiments")
@@ -419,7 +419,7 @@ class TestInputValidation:
     @pytest.mark.asyncio
     async def test_query_invalid_endpoint(self, mock_client, all_tools):
         """Test query with invalid endpoint name."""
-        mock_client.query.side_effect = httpx.HTTPStatusError(
+        mock_client.query_all.side_effect = httpx.HTTPStatusError(
             "Not Found",
             request=MagicMock(),
             response=MagicMock(status_code=404)

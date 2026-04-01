@@ -95,6 +95,75 @@ class IsablAPIClient:
         response.raise_for_status()
         return response.json()
 
+    async def query_all(
+        self,
+        endpoint: str,
+        filters: Optional[Dict[str, Any]] = None,
+        fields: Optional[List[str]] = None,
+        limit: int = 100,
+        max_results: Optional[int] = None,
+    ) -> Dict[str, Any]:
+        """
+        Query an endpoint and transparently paginate through all pages.
+
+        Args:
+            endpoint: API endpoint (e.g., "analyses")
+            filters: Django-style query filters
+            fields: List of fields to return (optional)
+            limit: Page size for each API call
+            max_results: Optional cap on total returned rows
+
+        Returns:
+            Combined API response with merged `results`
+        """
+        offset = 0
+        combined_results: List[Dict[str, Any]] = []
+        count = 0
+        has_more = False
+        next_url: Optional[str] = None
+
+        while True:
+            page = await self.query(
+                endpoint,
+                filters=filters,
+                fields=fields,
+                limit=limit,
+                offset=offset,
+            )
+
+            count = page.get("count", count)
+            next_url = page.get("next")
+            page_results = page.get("results", [])
+            combined_results.extend(page_results)
+
+            if max_results is not None and len(combined_results) >= max_results:
+                combined_results = combined_results[:max_results]
+                has_more = (next_url is not None) or (count > len(combined_results))
+                next_url = page.get("next")
+                break
+
+            if next_url is None or not page_results:
+                has_more = False
+                break
+
+            offset += limit
+
+        return {
+            "count": count,
+            "next": next_url if has_more else None,
+            "results": combined_results,
+            "has_more": has_more,
+        }
+
+    def analysis_browse_url(self, analysis_pk: int) -> str:
+        """
+        Build analysis browse URL from ISABL_API_URL.
+
+        Example: http://localhost:8000/api/v1/?analysis=123
+        """
+        api_base = f"{self.base_url}/"
+        return f"{api_base}?analysis={analysis_pk}"
+
     async def get_instance(
         self,
         endpoint: str,

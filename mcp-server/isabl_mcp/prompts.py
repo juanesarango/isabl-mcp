@@ -9,7 +9,7 @@ from __future__ import annotations
 from typing import Optional
 
 from mcp.server.fastmcp import FastMCP
-from mcp.server.fastmcp.prompts.base import Message, UserMessage, AssistantMessage
+from mcp.server.fastmcp.prompts.base import Message, UserMessage
 
 
 def register_prompts(mcp: FastMCP) -> None:

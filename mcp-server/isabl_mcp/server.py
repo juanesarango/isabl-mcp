@@ -11,9 +11,14 @@ Tools provided:
 - get_app_template: Get app boilerplate code
 - merge_results: Combine results from multiple analyses
 - project_summary: Get project statistics
+- search_knowledge: Search the Isabl knowledge base
+- get_knowledge_tree: Browse the knowledge tree hierarchy
+- get_knowledge_doc: Get full content of a knowledge document
 
 Usage:
+    isabl-mcp
     python -m isabl_mcp.server
+    uvx isabl-mcp
 
 Environment variables:
     ISABL_API_URL: Isabl API URL (default: http://localhost:8000/api/v1/)
@@ -29,6 +34,7 @@ from isabl_mcp.clients.isabl_api import IsablAPIClient
 from isabl_mcp.tools.data import register_data_tools
 from isabl_mcp.tools.apps import register_app_tools
 from isabl_mcp.tools.aggregation import register_aggregation_tools
+from isabl_mcp.tools.knowledge import register_knowledge_tools
 
 
 # Configure logging
@@ -47,7 +53,7 @@ def create_server() -> FastMCP:
     # Initialize Isabl API client
     api_client = IsablAPIClient()
 
-    # Register tools
+    # Register API tools
     logger.info("Registering data tools...")
     register_data_tools(mcp, api_client)
 
@@ -56,6 +62,10 @@ def create_server() -> FastMCP:
 
     logger.info("Registering aggregation tools...")
     register_aggregation_tools(mcp, api_client)
+
+    # Register knowledge base tools (uses bundled data)
+    logger.info("Registering knowledge tools...")
+    register_knowledge_tools(mcp)
 
     logger.info(
         f"Isabl MCP Server initialized. API URL: {settings.isabl_api_url}"

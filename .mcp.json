@@ -2,10 +2,6 @@
   "isabl": {
     "type": "stdio",
     "command": "uvx",
-    "args": ["isabl-mcp"],
-    "env": {
-      "ISABL_API_URL": "",
-      "ISABL_API_TOKEN": ""
-    }
+    "args": ["isabl-mcp"]
   }
 }

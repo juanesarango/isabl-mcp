@@ -7,6 +7,20 @@
 
 ## Install
 
+### Claude Code (plugin — MCP + skills in one step)
+
+```bash
+/plugin install github:juanesarango/isabl-skills
+```
+
+This installs **everything**: 11 MCP tools + 8 guided skills. Credentials are auto-discovered from `~/.isabl/settings.json` (the standard `isabl_cli` config).
+
+### Claude Code (MCP only)
+
+```bash
+claude mcp add isabl -- uvx isabl-mcp
+```
+
 ### Cursor (one click)
 
 Click the badge above, or add to `.cursor/mcp.json`:
@@ -26,19 +40,6 @@ Click the badge above, or add to `.cursor/mcp.json`:
 }
 ```
 
-### Claude Code
-
-```bash
-claude mcp add isabl -- uvx isabl-mcp
-```
-
-Then set your credentials:
-
-```bash
-export ISABL_API_URL="https://your-isabl-instance.com/api/v1/"
-export ISABL_API_TOKEN="your-token"
-```
-
 ### pip / uvx
 
 ```bash
@@ -49,6 +50,19 @@ uvx isabl-mcp
 pip install isabl-mcp
 isabl-mcp
 ```
+
+## Credentials
+
+The server auto-discovers your API URL and token from `~/.isabl/settings.json` (created by `isabl_cli login`). No env vars needed if you've already logged in.
+
+You can also set them explicitly:
+
+```bash
+export ISABL_API_URL="https://your-isabl-instance.com/api/v1/"
+export ISABL_API_TOKEN="your-token"
+```
+
+Env vars always take precedence over the settings file.
 
 ## What can I ask?
 
@@ -92,7 +106,7 @@ The AI assistant uses the MCP tools to query your Isabl instance in real time, a
 
 ## Skills (8)
 
-Install Claude Code skills for guided workflows:
+Skills are guided multi-step workflows for common Isabl tasks. They're included automatically with the plugin install, or can be installed standalone:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/juanesarango/isabl-skills/main/scripts/install.sh | bash
@@ -119,8 +133,8 @@ The knowledge base is built from 289+ documents extracted from Isabl's source co
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `ISABL_API_URL` | Isabl API base URL | `http://localhost:8000/api/v1/` |
-| `ISABL_API_TOKEN` | API authentication token | (none) |
+| `ISABL_API_URL` | Isabl API base URL | auto from `~/.isabl/settings.json` |
+| `ISABL_API_TOKEN` | API authentication token | auto from `~/.isabl/settings.json` |
 | `ISABL_VERIFY_SSL` | Verify SSL certificates | `true` |
 | `ISABL_TIMEOUT` | HTTP timeout in seconds | `30` |
 
@@ -129,7 +143,7 @@ The knowledge base is built from 289+ documents extracted from Isabl's source co
 ```bash
 cd mcp-server
 uv sync --dev
-uv run pytest              # 150 tests
+uv run pytest              # 169 tests
 uv run isabl-mcp           # start server locally
 ```
 

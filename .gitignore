@@ -47,3 +47,11 @@ htmlcov/
 # Build artifacts
 *.log
 .playwright-mcp/
+
+# Eval output (regenerated)
+knowledge/output/eval_*.json
+knowledge/output/eval_*.md
+
+# Claude reviews (local)
+.claude/reviews/
+.claude/progress.md

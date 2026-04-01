@@ -6,10 +6,10 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
 authors = [
-    { name = "Isabl Team", email = "support@isabl.io" }
+    { name = "Isabl Team", email = "juanes.ao@gmail.com" }
 ]
 maintainers = [
-    { name = "Isabl Team", email = "support@isabl.io" }
+    { name = "Isabl Team", email = "juanes.ao@gmail.com" }
 ]
 keywords = [
     "mcp",

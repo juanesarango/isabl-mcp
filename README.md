@@ -8,7 +8,7 @@
 
 ### Claude Code (recommended — gets everything)
 
-```bash
+```text
 /plugin install github:juanesarango/isabl-skills
 ```
 
@@ -152,7 +152,7 @@ The knowledge base is built from 347 documents extracted from Isabl's source cod
 ```bash
 cd mcp-server
 uv sync --dev
-uv run pytest              # 179 tests
+uv run pytest
 uv run ruff check isabl_mcp/  # lint
 uv run mcp dev isabl_mcp/server.py  # test with MCP Inspector
 uv run isabl-mcp           # start server locally

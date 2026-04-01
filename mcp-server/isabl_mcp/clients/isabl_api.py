@@ -116,6 +116,9 @@ class IsablAPIClient:
         Returns:
             Combined API response with merged `results`
         """
+        if limit <= 0:
+            limit = 100
+
         offset = 0
         combined_results: List[Dict[str, Any]] = []
         count = 0

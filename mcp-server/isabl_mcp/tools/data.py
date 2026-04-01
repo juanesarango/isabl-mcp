@@ -114,6 +114,8 @@ def register_data_tools(mcp: FastMCP, client: IsablAPIClient) -> None:
             # ID convention for entities: prefer human-readable identifier
             isabl_query("experiments", {"projects": 102}, output_fields=["system_id"])
         """
+        normalized_format = output_format.lower().strip()
+
         result = await client.query_all(
             endpoint=endpoint,
             filters=filters or {},
@@ -126,7 +128,7 @@ def register_data_tools(mcp: FastMCP, client: IsablAPIClient) -> None:
         selected_fields = output_fields
         if selected_fields:
             rows = _project_rows(endpoint, rows, selected_fields)
-        elif output_format in {"table", "csv"}:
+        elif normalized_format in {"table", "csv"}:
             if rows:
                 selected_fields = list(rows[0].keys())
             else:
@@ -138,7 +140,6 @@ def register_data_tools(mcp: FastMCP, client: IsablAPIClient) -> None:
             "has_more": result.get("has_more", result.get("next") is not None),
         }
 
-        normalized_format = output_format.lower().strip()
         if normalized_format == "table":
             response["output_format"] = "table"
             response["columns"] = selected_fields or []

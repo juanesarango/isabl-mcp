@@ -95,7 +95,7 @@ For analysis summaries:
 
 ```bash
 uv sync --dev
-uv run pytest        # 150 tests
+uv run pytest
 uv run isabl-mcp     # start server
 ```
 

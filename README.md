@@ -6,7 +6,7 @@
 
 ## Install
 
-### <img src="https://cdn.simpleicons.org/anthropic" width="16" height="16"> Claude Code (recommended — gets everything)
+### <img src="https://cdn.simpleicons.org/claude" width="16" height="16"> Claude Code (recommended — gets everything)
 
 ```text
 /plugin install github:juanesarango/isabl-mcp
@@ -14,7 +14,7 @@
 
 Installs the **plugin**, which bundles the MCP server (11 tools) + 8 guided skills as `/isabl-*` slash commands. Credentials are auto-discovered from `~/.isabl/settings.json`.
 
-### <img src="https://cdn.simpleicons.org/anthropic" width="16" height="16"> Claude Code (MCP only, no skills)
+### <img src="https://cdn.simpleicons.org/claude" width="16" height="16"> Claude Code (MCP only, no skills)
 
 ```bash
 claude mcp add isabl -- uvx isabl-mcp
@@ -41,7 +41,7 @@ Click the badge above, or add to `.cursor/mcp.json`:
 }
 ```
 
-### <img src="https://cdn.simpleicons.org/openai" width="16" height="16"> Codex
+### Codex
 
 Add to `~/.codex/config.toml`:
 

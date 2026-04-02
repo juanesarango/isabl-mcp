@@ -1,14 +1,17 @@
 {
-  "name": "isabl-marketplace",
-  "owner": {
-    "name": "Isabl Team"
-  },
+  "name": "isabl-mcp",
+  "owner": { "name": "juanesarango" },
   "plugins": [
     {
-      "name": "isabl",
-      "source": ".",
-      "description": "MCP server for the Isabl genomics platform. Query experiments, analyses, results, and search the Isabl knowledge base.",
-      "version": "0.2.0"
+      "name": "isabl-mcp",
+      "description": "MCP server providing AI agents access to the Isabl genomics platform with tools for querying experiments, analyses, and pipeline data",
+      "version": "0.2.0",
+      "author": { "name": "Juan E. Arango" },
+      "source": "./",
+      "category": "development",
+      "repository": "https://github.com/juanesarango/isabl-mcp",
+      "license": "MIT",
+      "keywords": ["mcp", "genomics", "isabl", "bioinformatics", "pipeline"]
     }
   ]
 }

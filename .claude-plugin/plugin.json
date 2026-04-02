@@ -1,9 +1,9 @@
 {
-  "name": "isabl",
-  "description": "MCP server for the Isabl genomics platform. Query experiments, analyses, results, and search the Isabl knowledge base.",
+  "name": "isabl-mcp",
   "version": "0.2.0",
-  "author": {
-    "name": "Isabl Team",
-    "email": "juanes.ao@gmail.com"
-  }
+  "description": "MCP server and skills for the Isabl genomics platform",
+  "author": { "name": "Juan E. Arango" },
+  "repository": "https://github.com/juanesarango/isabl-mcp",
+  "license": "MIT",
+  "keywords": ["mcp", "genomics", "isabl", "bioinformatics", "pipeline"]
 }

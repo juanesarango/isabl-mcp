@@ -1,5 +1,5 @@
 ---
-name: submit-data
+name: isabl-submit-data
 description: Submit sequencing data to Isabl by creating individuals, samples, and experiments. Use when registering new data files or importing from external sources.
 tools: Read, Bash
 model: inherit

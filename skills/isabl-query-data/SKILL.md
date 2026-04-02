@@ -1,5 +1,5 @@
 ---
-name: query-data
+name: isabl-query-data
 description: Help construct queries to retrieve data from Isabl using the Python SDK. Use when searching for experiments, analyses, samples, or other data.
 tools: Read, Bash
 model: inherit

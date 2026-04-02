@@ -10,10 +10,10 @@
 
 ```text
 /plugin marketplace add juanesarango/isabl-mcp
-/plugin install isabl-mcp
+/plugin install isabl
 ```
 
-Installs the MCP server (11 tools) + 8 guided skills as `/isabl-*` slash commands. Credentials are auto-discovered from `~/.isabl/settings.json`. For MCP only (no skills): `claude mcp add isabl -- uvx isabl-mcp`.
+Installs the MCP server (11 tools) + 8 guided skills as `/isabl-*` slash commands (type `/isabl` to see all). Credentials are auto-discovered from `~/.isabl/settings.json`. For MCP only (no skills): `claude mcp add isabl -- uvx isabl-mcp`.
 
 ### <img src="https://cdn.simpleicons.org/cursor" width="16" height="16"> Cursor
 
@@ -62,7 +62,7 @@ Works with any MCP-compatible client (Windsurf, Zed, Claude Desktop, etc.).
 |-----------|-------------------|------------------------|
 | 11 MCP tools (query, debug, search) | ✅ | ✅ |
 | 8 MCP prompts (guided workflows) | ✅ | ✅ (client support varies) |
-| 8 skills (`/isabl:*` slash commands) | ✅ | ❌ (Claude Code only) |
+| 8 skills (`/isabl-*` slash commands) | ✅ | ❌ (Claude Code only) |
 | Knowledge base (347 docs) | ✅ | ✅ |
 | Auto-discover credentials | ✅ | ✅ |
 
@@ -111,18 +111,18 @@ Env vars always take precedence over the settings file.
 
 ## Skills (8) — Claude Code only
 
-Skills are guided multi-step workflows available as `/isabl:*` slash commands. Included automatically with the plugin install.
+Skills are guided multi-step workflows available as `/isabl-*` slash commands. Included automatically with the plugin install.
 
 | Skill | Purpose |
 |-------|---------|
-| `/isabl:query-data` | Query data from Isabl API |
-| `/isabl:write-app` | Create a new Isabl application |
-| `/isabl:monitor-analyses` | Track analysis status |
-| `/isabl:debug-analysis` | Debug a failed analysis |
-| `/isabl:merge-results` | Aggregate results across analyses |
-| `/isabl:submit-data` | Submit new sequencing data |
-| `/isabl:project-report` | Generate project status reports |
-| `/isabl:run-pipeline` | Run multiple apps as pipeline |
+| `/isabl-query-data` | Query data from Isabl API |
+| `/isabl-write-app` | Create a new Isabl application |
+| `/isabl-monitor-analyses` | Track analysis status |
+| `/isabl-debug-analysis` | Debug a failed analysis |
+| `/isabl-merge-results` | Aggregate results across analyses |
+| `/isabl-submit-data` | Submit new sequencing data |
+| `/isabl-project-report` | Generate project status reports |
+| `/isabl-run-pipeline` | Run multiple apps as pipeline |
 
 ## How it works
 

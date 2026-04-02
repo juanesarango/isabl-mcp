@@ -1,9 +1,9 @@
 {
-  "name": "isabl-mcp",
+  "name": "isabl",
   "owner": { "name": "juanesarango" },
   "plugins": [
     {
-      "name": "isabl-mcp",
+      "name": "isabl",
       "description": "MCP server providing AI agents access to the Isabl genomics platform with tools for querying experiments, analyses, and pipeline data",
       "version": "0.2.0",
       "author": { "name": "Juan E. Arango" },

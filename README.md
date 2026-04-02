@@ -41,7 +41,7 @@ Click the badge above, or add to `.cursor/mcp.json`:
 }
 ```
 
-### Codex
+### <img src="https://img.icons8.com/fluency/16/chatgpt.png" width="16" height="16"> Codex
 
 Add to `~/.codex/config.toml`:
 

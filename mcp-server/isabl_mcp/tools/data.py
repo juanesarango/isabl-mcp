@@ -49,13 +49,20 @@ def register_data_tools(mcp: FastMCP, client: IsablAPIClient) -> None:
             projected.append(item)
         return projected
 
+    def _escape_cell(value: Any) -> str:
+        """Escape a value for markdown table cells."""
+        text = "" if value is None else str(value)
+        text = text.replace("|", "\\|")
+        text = text.replace("\n", " ").replace("\r", " ")
+        return text
+
     def _format_table(rows: List[Dict[str, Any]], columns: List[str]) -> str:
         """Format rows as markdown table."""
-        header = "| " + " | ".join(columns) + " |"
+        header = "| " + " | ".join(_escape_cell(c) for c in columns) + " |"
         separator = "| " + " | ".join(["---"] * len(columns)) + " |"
         data_lines = []
         for row in rows:
-            values = ["" if row.get(col) is None else str(row.get(col)) for col in columns]
+            values = [_escape_cell(row.get(col)) for col in columns]
             data_lines.append("| " + " | ".join(values) + " |")
         return "\n".join([header, separator] + data_lines)
 

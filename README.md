@@ -8,8 +8,9 @@
 
 ### <img src="https://cdn.simpleicons.org/claude" width="16" height="16"> Claude Code
 
-```text
-/plugin install github:juanesarango/isabl-mcp
+```bash
+claude plugin marketplace add juanesarango/isabl-mcp
+claude plugin install isabl-mcp
 ```
 
 Installs the MCP server (11 tools) + 8 guided skills as `/isabl-*` slash commands. Credentials are auto-discovered from `~/.isabl/settings.json`. For MCP only (no skills): `claude mcp add isabl -- uvx isabl-mcp`.

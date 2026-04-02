@@ -1,6 +1,6 @@
 # Isabl MCP Server
 
-[![CI](https://github.com/juanesarango/isabl-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/juanesarango/isabl-skills/actions/workflows/ci.yml)
+[![CI](https://github.com/juanesarango/isabl-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/juanesarango/isabl-mcp/actions/workflows/ci.yml)
 
 > Talk to your genomics data. MCP server + knowledge base for the [Isabl](https://docs.isabl.io) platform.
 
@@ -9,7 +9,7 @@
 ### Claude Code (recommended — gets everything)
 
 ```text
-/plugin install github:juanesarango/isabl-skills
+/plugin install github:juanesarango/isabl-mcp
 ```
 
 Installs the **plugin**, which bundles the MCP server (11 tools) + 8 guided skills as `/isabl-*` slash commands. Credentials are auto-discovered from `~/.isabl/settings.json`.
@@ -136,7 +136,7 @@ The AI assistant uses the MCP tools to query your Isabl instance in real time, a
 
 The knowledge base is built from 347 documents extracted from Isabl's source code, documentation, and API specifications. Browse the interactive visualization:
 
-[**Explore the Knowledge Tree**](https://juanesarango.github.io/isabl-skills)
+[**Explore the Knowledge Tree**](https://juanesarango.github.io/isabl-mcp)
 
 ## Configuration
 

@@ -1,20 +1,115 @@
-# 🧬 🦾 Isabl Skills
+# Isabl MCP Server
 
 [![CI](https://github.com/juanesarango/isabl-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/juanesarango/isabl-skills/actions/workflows/ci.yml)
 
-> Claude Code skills and MCP server for the Isabl genomics platform
+> Talk to your genomics data. MCP server + knowledge base for the [Isabl](https://docs.isabl.io) platform.
 
-## What is Isabl?
+## Install
 
-[Isabl](https://docs.isabl.io) is a platform for the management, analysis, and visualization of genomic data ([paper](https://link.springer.com/article/10.1186/s12859-020-03879-7)).
+### Claude Code (recommended — gets everything)
 
-## Install Skills
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/juanesarango/isabl-skills/main/scripts/install.sh | bash
+```text
+/plugin install github:juanesarango/isabl-skills
 ```
 
-## Available Skills
+Installs the **plugin**, which bundles the MCP server (11 tools) + 8 guided skills as `/isabl-*` slash commands. Credentials are auto-discovered from `~/.isabl/settings.json`.
+
+### Claude Code (MCP only, no skills)
+
+```bash
+claude mcp add isabl -- uvx isabl-mcp
+```
+
+Adds only the MCP server. You get the 11 tools but not the guided skill workflows.
+
+### Cursor
+
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name=isabl&config=eyJjb21tYW5kIjogInV2eCIsICJhcmdzIjogWyJpc2FibC1tY3AiXSwgImVudiI6IHsiSVNBQkxfQVBJX1VSTCI6ICJodHRwczovL3lvdXItaXNhYmwtaW5zdGFuY2UuY29tL2FwaS92MS8iLCAiSVNBQkxfQVBJX1RPS0VOIjogInlvdXItdG9rZW4taGVyZSJ9fQ%3D%3D)
+
+Click the badge above, or add to `.cursor/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "isabl": {
+      "command": "uvx",
+      "args": ["isabl-mcp"],
+      "env": {
+        "ISABL_API_URL": "https://your-isabl-instance.com/api/v1/",
+        "ISABL_API_TOKEN": "your-token"
+      }
+    }
+  }
+}
+```
+
+Cursor gets the 11 MCP tools. Skills are not available in Cursor (they're a Claude Code feature).
+
+### Other MCP clients / standalone
+
+```bash
+uvx isabl-mcp        # run directly, no install needed
+pip install isabl-mcp # or install globally
+```
+
+Works with any MCP-compatible client (Windsurf, Zed, Claude Desktop, etc.).
+
+## What's included
+
+| Component | Claude Code Plugin | MCP only (Cursor, etc.) |
+|-----------|-------------------|------------------------|
+| 11 MCP tools (query, debug, search) | Yes | Yes |
+| 8 MCP prompts (guided workflows) | Yes | Yes (client support varies) |
+| 8 skills (`/isabl-*` slash commands) | Yes | No (Claude Code only) |
+| Knowledge base (347 docs) | Yes | Yes |
+| Auto-discover credentials | Yes | Yes |
+
+## Credentials
+
+The server auto-discovers your API URL and token from `~/.isabl/settings.json` (created by `isabl_cli login`). No env vars needed if you've already logged in.
+
+You can also set them explicitly:
+
+```bash
+export ISABL_API_URL="https://your-isabl-instance.com/api/v1/"
+export ISABL_API_TOKEN="your-token"
+```
+
+Env vars always take precedence over the settings file.
+
+## What can I ask?
+
+> "Show me all failed analyses in project 102"
+
+> "How many WGS experiments do we have for patient ISB_H000001?"
+
+> "Analysis 12345 failed. Show me the error logs and help me figure out what went wrong"
+
+> "Get the VCF file paths from all succeeded MUTECT analyses in project 102"
+
+> "How do I write a new paired tumor-normal application?"
+
+> "Give me a summary of project 102"
+
+## Tools (11)
+
+| Tool | Description |
+|------|------------|
+| `isabl_query` | Query any API endpoint with Django-style filters |
+| `isabl_get_tree` | Get Individual -> Sample -> Experiment -> Analysis hierarchy |
+| `isabl_get_results` | Get result file paths from a completed analysis |
+| `isabl_get_logs` | Read stdout/stderr/script logs from any analysis |
+| `get_apps` | Search for installed applications by name |
+| `get_app_template` | Generate boilerplate code for a new application |
+| `merge_results` | Collect and preview result files across multiple analyses |
+| `project_summary` | Get project stats: experiment counts, analysis breakdown |
+| `search_knowledge` | Search 347 docs from Isabl's code, docs, and API specs |
+| `get_knowledge_tree` | Browse the hierarchical knowledge tree |
+| `get_knowledge_doc` | Get full content of any knowledge base document |
+
+## Skills (8) — Claude Code only
+
+Skills are guided multi-step workflows available as `/isabl-*` slash commands. Included automatically with the plugin install.
 
 | Skill | Purpose |
 |-------|---------|
@@ -27,58 +122,54 @@ curl -fsSL https://raw.githubusercontent.com/juanesarango/isabl-skills/main/scri
 | `/isabl-project-report` | Generate project status reports |
 | `/isabl-run-pipeline` | Run multiple apps as pipeline |
 
-See [skills/README.md](skills/README.md) for detailed guidance on which skill to use.
+## How it works
 
-## MCP Server
-
-For programmatic access to Isabl from any MCP-compatible client:
-
-```bash
-cd mcp-server && pip install -e .
+```
+You (plain English) --> AI Assistant --> MCP Server --> Isabl API --> Your data
+                                    |
+                                    +--> Knowledge Base --> Platform docs & code
 ```
 
-See [mcp-server/README.md](mcp-server/README.md) for setup and available tools.
+The AI assistant uses the MCP tools to query your Isabl instance in real time, and the built-in knowledge base to understand Isabl concepts, API patterns, and best practices.
 
-## Knowledge Base
+## Knowledge Tree
 
-The `knowledge/` package builds a hierarchical knowledge tree from Isabl's documentation sources (GitHub repos, Gitbook docs) for agent-consumable retrieval.
+The knowledge base is built from 347 documents extracted from Isabl's source code, documentation, and API specifications. Browse the interactive visualization:
 
-```bash
-cd knowledge && uv sync
-source ../.env
-uv run isabl-knowledge build        # extract → summarize → tree → publish
-uv run isabl-knowledge serve         # start MCP server with tree tools
-```
+[**Explore the Knowledge Tree**](https://juanesarango.github.io/isabl-skills)
 
-Visualize Current Tree interactively: https://juanesarango.github.io/isabl-skills
-
-### LLM Configuration
-
-The summarizer and tree builder require an LLM. Configure via environment variables in `.env`:
+## Configuration
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `LLM_BASE_URL` | Gateway URL (e.g. Portkey, Galileo) | Anthropic API |
-| `LLM_API_KEY` | API key for the gateway | `ANTHROPIC_API_KEY` |
-| `LLM_MODEL` | Model identifier (e.g. `@bedrock/claude-opus-4-6`) | `claude-sonnet-4-20250514` |
+| `ISABL_API_URL` | Isabl API base URL | auto from `~/.isabl/settings.json` |
+| `ISABL_API_TOKEN` | API authentication token | auto from `~/.isabl/settings.json` |
+| `ISABL_VERIFY_SSL` | Verify SSL certificates | `true` |
+| `ISABL_TIMEOUT` | HTTP timeout in seconds | `30` |
 
-Copy `.env.example` to `.env` and fill in your values. The `.env` file is gitignored.
+## Development
 
-## Repository Structure
-
+```bash
+cd mcp-server
+uv sync --dev
+uv run pytest
+uv run ruff check isabl_mcp/  # lint
+uv run mcp dev isabl_mcp/server.py  # test with MCP Inspector
+uv run isabl-mcp           # start server locally
 ```
-isabl-skills/
-├── skills/          # 8 Claude Code skills
-├── mcp-server/      # MCP server (9 tools)
-├── knowledge/       # Knowledge tree pipeline
-├── scripts/         # Install script
-└── dev/             # Development notes & reference docs
-```
+
+### Contributing
+
+1. Add tools in `mcp-server/isabl_mcp/tools/`, register in `server.py`, add tests
+2. Add skills as `skills/isabl-*.md` (YAML frontmatter + workflow steps)
+3. Use `ruff` for linting, type hints for Python
+4. Submit a PR
 
 ## Related
 
 - [Isabl Documentation](https://docs.isabl.io)
 - [isabl_cli](https://github.com/papaemmelab/isabl_cli) - Python SDK
+- [Isabl Paper](https://link.springer.com/article/10.1186/s12859-020-03879-7)
 
 ## License
 

@@ -32,6 +32,7 @@ ENV/
 # IDE
 .idea/
 .vscode/
+.cursor/
 *.swp
 *.swo
 
@@ -46,3 +47,12 @@ htmlcov/
 
 # Build artifacts
 *.log
+.playwright-mcp/
+
+# Knowledge pipeline eval output (regenerated)
+knowledge/output/eval_*.json
+knowledge/output/eval_*.md
+
+# Claude reviews (local)
+.claude/reviews/
+.claude/progress.md

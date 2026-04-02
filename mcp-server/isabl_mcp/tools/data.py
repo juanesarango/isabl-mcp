@@ -9,6 +9,8 @@ Tools:
 
 from __future__ import annotations
 
+import csv
+from io import StringIO
 from typing import Any, Dict, List, Optional
 
 from mcp.server.fastmcp import FastMCP
@@ -19,12 +21,69 @@ from isabl_mcp.clients.isabl_api import IsablAPIClient
 def register_data_tools(mcp: FastMCP, client: IsablAPIClient) -> None:
     """Register data access tools with the MCP server."""
 
+    def _get_nested_value(data: Dict[str, Any], field: str) -> Any:
+        """Resolve dotted field paths from nested dictionaries."""
+        current: Any = data
+        for key in field.split("."):
+            if isinstance(current, dict):
+                current = current.get(key)
+            else:
+                return None
+        return current
+
+    def _project_rows(
+        endpoint: str,
+        rows: List[Dict[str, Any]],
+        output_fields: List[str],
+    ) -> List[Dict[str, Any]]:
+        """Project rows to a list of explicit output fields."""
+        projected: List[Dict[str, Any]] = []
+        for row in rows:
+            item: Dict[str, Any] = {}
+            for field in output_fields:
+                if field == "url" and endpoint == "analyses":
+                    pk = row.get("pk")
+                    item[field] = client.analysis_browse_url(pk) if pk is not None else None
+                else:
+                    item[field] = _get_nested_value(row, field)
+            projected.append(item)
+        return projected
+
+    def _escape_cell(value: Any) -> str:
+        """Escape a value for markdown table cells."""
+        text = "" if value is None else str(value)
+        text = text.replace("|", "\\|")
+        text = text.replace("\n", " ").replace("\r", " ")
+        return text
+
+    def _format_table(rows: List[Dict[str, Any]], columns: List[str]) -> str:
+        """Format rows as markdown table."""
+        header = "| " + " | ".join(_escape_cell(c) for c in columns) + " |"
+        separator = "| " + " | ".join(["---"] * len(columns)) + " |"
+        data_lines = []
+        for row in rows:
+            values = [_escape_cell(row.get(col)) for col in columns]
+            data_lines.append("| " + " | ".join(values) + " |")
+        return "\n".join([header, separator] + data_lines)
+
+    def _format_csv(rows: List[Dict[str, Any]], columns: List[str]) -> str:
+        """Format rows as CSV."""
+        output = StringIO()
+        writer = csv.DictWriter(output, fieldnames=columns, extrasaction="ignore")
+        writer.writeheader()
+        for row in rows:
+            writer.writerow({c: row.get(c) for c in columns})
+        return output.getvalue().strip()
+
     @mcp.tool()
     async def isabl_query(
         endpoint: str,
         filters: Optional[Dict[str, Any]] = None,
         fields: Optional[List[str]] = None,
         limit: int = 100,
+        output_fields: Optional[List[str]] = None,
+        output_format: str = "json",
+        max_results: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Query any Isabl API endpoint with filters.
@@ -37,8 +96,17 @@ def register_data_tools(mcp: FastMCP, client: IsablAPIClient) -> None:
                      - {"status": "FAILED"} - filter by status
                      - {"application__name": "MUTECT"} - filter by related field
                      - {"created__gte": "2024-01-01"} - date comparisons
-            fields: List of fields to return (optional, returns all if not specified)
-            limit: Maximum number of results (default 100)
+            fields: List of API fields to return (optional, returns all if not specified)
+            limit: Maximum results per page while paginating (default 100)
+            output_fields: Optional projected fields in final output. Supports dotted
+                          paths (e.g., "application.name") and "url" for analyses.
+                          The "url" field is a frontend link derived from ISABL_API_URL
+                          by removing "/api/v1/" and appending "?analysis=<pk>".
+            output_format: "json" (default), "table", or "csv"
+            max_results: Optional cap for total returned rows across all pages.
+                        Use this for large endpoints to avoid slow responses
+                        (e.g., max_results=500). When set, the response includes
+                        has_more=True if more data exists beyond the cap.
 
         Returns:
             API response with count and results list
@@ -52,18 +120,51 @@ def register_data_tools(mcp: FastMCP, client: IsablAPIClient) -> None:
 
             # Get specific fields only
             isabl_query("analyses", {"status": "SUCCEEDED"}, fields=["pk", "results"])
+
+            # ID convention for entities: prefer human-readable identifier
+            isabl_query("experiments", {"projects": 102}, output_fields=["system_id"])
         """
-        result = await client.query(
+        normalized_format = output_format.lower().strip()
+
+        result = await client.query_all(
             endpoint=endpoint,
             filters=filters or {},
             fields=fields,
             limit=limit,
+            max_results=max_results,
         )
-        return {
+
+        rows = result.get("results", [])
+        selected_fields = output_fields
+        if selected_fields:
+            rows = _project_rows(endpoint, rows, selected_fields)
+        elif normalized_format in {"table", "csv"}:
+            if rows:
+                selected_fields = list(rows[0].keys())
+            else:
+                selected_fields = []
+
+        response: Dict[str, Any] = {
             "count": result.get("count", 0),
-            "results": result.get("results", []),
-            "has_more": result.get("next") is not None,
+            "results": rows,
+            "has_more": result.get("has_more", result.get("next") is not None),
         }
+
+        if normalized_format == "table":
+            response["output_format"] = "table"
+            response["columns"] = selected_fields or []
+            response["output"] = _format_table(rows, selected_fields or [])
+        elif normalized_format == "csv":
+            response["output_format"] = "csv"
+            response["columns"] = selected_fields or []
+            response["output"] = _format_csv(rows, selected_fields or [])
+        elif normalized_format != "json":
+            response["warning"] = (
+                f"Unsupported output_format '{output_format}'. "
+                "Returned JSON format instead."
+            )
+
+        return response
 
     @mcp.tool()
     async def isabl_get_tree(identifier: str) -> Dict[str, Any]:

@@ -60,14 +60,3 @@ jobs:
         run: |
           source .venv/bin/activate
           ruff check isabl_mcp/
-
-  install-script:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Test install script
-        run: |
-          chmod +x scripts/install.sh
-          # Dry run - check script syntax
-          bash -n scripts/install.sh

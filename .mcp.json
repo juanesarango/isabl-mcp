@@ -1,0 +1,7 @@
+{
+  "isabl": {
+    "type": "stdio",
+    "command": "uvx",
+    "args": ["isabl-mcp"]
+  }
+}

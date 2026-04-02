@@ -103,7 +103,10 @@ def register_data_tools(mcp: FastMCP, client: IsablAPIClient) -> None:
                           The "url" field is a frontend link derived from ISABL_API_URL
                           by removing "/api/v1/" and appending "?analysis=<pk>".
             output_format: "json" (default), "table", or "csv"
-            max_results: Optional cap for total returned rows across all pages
+            max_results: Optional cap for total returned rows across all pages.
+                        Use this for large endpoints to avoid slow responses
+                        (e.g., max_results=500). When set, the response includes
+                        has_more=True if more data exists beyond the cap.
 
         Returns:
             API response with count and results list

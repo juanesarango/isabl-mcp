@@ -1,5 +1,5 @@
 ---
-name: merge-results
+name: isabl-merge-results
 description: Aggregate results from multiple Isabl analyses into combined datasets. Use when merging VCFs, TSVs, or other outputs across samples or cohorts.
 tools: Read, Bash
 model: inherit

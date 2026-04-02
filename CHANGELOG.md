@@ -17,6 +17,7 @@ Isabl MCP Server provides 11 MCP tools and 8 prompts for the Isabl genomics plat
 - Knowledge data (347 documents) bundled inside the pip package
 - 8 MCP prompts for guided workflows (debug, query, write-app, etc.)
 - Claude Code plugin manifest (`.claude-plugin/`, `.mcp.json`)
+- Renamed plugin from `isabl-mcp` to `isabl`; skills use flat `/isabl-*` naming
 - PyPI publish workflow (GitHub Actions, triggered on release)
 - Auto-discovery of API URL and token from `~/.isabl/settings.json`
 - Transparent pagination via `query_all()` with `max_results` cap

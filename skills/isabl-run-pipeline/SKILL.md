@@ -1,5 +1,5 @@
 ---
-name: run-pipeline
+name: isabl-run-pipeline
 description: Submit and run multiple Isabl applications as a pipeline. Use when chaining apps together or running a sequence of analyses on samples.
 tools: Read, Bash
 model: inherit

@@ -1,5 +1,5 @@
 {
-  "name": "isabl-mcp",
+  "name": "isabl",
   "version": "0.2.0",
   "description": "MCP server and skills for the Isabl genomics platform",
   "author": { "name": "Juan E. Arango" },

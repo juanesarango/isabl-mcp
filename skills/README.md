@@ -35,5 +35,5 @@
 
 ```text
 # Recommended: install as Claude Code plugin (gets MCP + skills)
-/plugin install github:juanesarango/isabl-skills
+/plugin install github:juanesarango/isabl-mcp
 ```

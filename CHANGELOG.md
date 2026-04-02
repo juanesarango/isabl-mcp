@@ -27,7 +27,7 @@ Isabl MCP Server provides 11 MCP tools and 8 prompts for the Isabl genomics plat
 
 - Server now exposes 11 tools + 8 prompts (up from 8 tools)
 - README rewritten with MCP-server-first framing
-- Project URLs updated to `juanesarango/isabl-skills`
+- Project URLs updated to `juanesarango/isabl-mcp`
 
 ## [0.1.0] - 2026-02-02
 

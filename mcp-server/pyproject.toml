@@ -51,11 +51,11 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/juanesarango/isabl-skills"
-Documentation = "https://github.com/juanesarango/isabl-skills#readme"
-Repository = "https://github.com/juanesarango/isabl-skills.git"
-Issues = "https://github.com/juanesarango/isabl-skills/issues"
-Changelog = "https://github.com/juanesarango/isabl-skills/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/juanesarango/isabl-mcp"
+Documentation = "https://github.com/juanesarango/isabl-mcp#readme"
+Repository = "https://github.com/juanesarango/isabl-mcp.git"
+Issues = "https://github.com/juanesarango/isabl-mcp/issues"
+Changelog = "https://github.com/juanesarango/isabl-mcp/blob/main/CHANGELOG.md"
 
 [project.scripts]
 isabl-mcp = "isabl_mcp.server:main"

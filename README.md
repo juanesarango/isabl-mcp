@@ -6,19 +6,13 @@
 
 ## Install
 
-### <img src="https://cdn.simpleicons.org/claude" width="16" height="16"> Claude Code (recommended — gets everything)
+### <img src="https://cdn.simpleicons.org/claude" width="16" height="16"> Claude Code
 
 ```text
 /plugin install github:juanesarango/isabl-mcp
 ```
 
-Installs the **plugin**, which bundles the MCP server (11 tools) + 8 guided skills as `/isabl-*` slash commands. Credentials are auto-discovered from `~/.isabl/settings.json`.
-
-### <img src="https://cdn.simpleicons.org/claude" width="16" height="16"> Claude Code (MCP only, no skills)
-
-```bash
-claude mcp add isabl -- uvx isabl-mcp
-```
+Installs the MCP server (11 tools) + 8 guided skills as `/isabl-*` slash commands. Credentials are auto-discovered from `~/.isabl/settings.json`. For MCP only (no skills): `claude mcp add isabl -- uvx isabl-mcp`.
 
 ### <img src="https://cdn.simpleicons.org/cursor" width="16" height="16"> Cursor
 

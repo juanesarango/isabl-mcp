@@ -149,6 +149,37 @@ The knowledge base is built from 347 documents extracted from Isabl's source cod
 | `ISABL_VERIFY_SSL` | Verify SSL certificates | `true` |
 | `ISABL_TIMEOUT` | HTTP timeout in seconds | `30` |
 
+## Example Usage
+
+#### Example Queries
+
+1. Common queries with desired output format:
+
+<img width="740" height="406" alt="Image" src="https://github.com/user-attachments/assets/43ce5f73-aa1f-4e98-9ce6-2ccc2cb250f8" />
+
+2. Multi-step queries:
+
+<img width="887" height="606" alt="Image" src="https://github.com/user-attachments/assets/95fcfa10-c9f0-4931-af12-3f548aa12a89" />
+<img width="888" height="718" alt="Image" src="https://github.com/user-attachments/assets/668528e3-8d35-4733-80e2-bfd85e90f467" />
+
+3. Help to write Isabl apps:
+
+<img width="766" height="1323" alt="Image" src="https://github.com/user-attachments/assets/f5b7540f-6d01-4f07-a18e-7fe582af68a9" />
+
+#### Example Commands
+
+Browse available commands: `/isabl`
+
+<img width="888" height="434" alt="Image" src="https://github.com/user-attachments/assets/561abe2d-466d-4cdd-b81c-887f57e010d0" />
+
+
+```
+/isabl:isabl-monitor-analyses check the status of RNA apps in project 455
+```
+
+<img width="886" height="826" alt="Image" src="https://github.com/user-attachments/assets/1db721d5-8019-4540-9b83-e488e588aec9" />
+<img width="891" height="498" alt="Image" src="https://github.com/user-attachments/assets/88504c28-55e5-4e66-a063-2d3c67e5f731" />
+
 ## Development
 
 ```bash

@@ -1,18 +1,4 @@
 {
-  "$schema": "https://context7.com/schema/context7.json",
   "url": "https://context7.com/juanesarango/isabl-mcp",
-  "public_key": "pk_VetnAPbriqBHHwJURgAra",
-  "projectTitle": "Isabl",
-  "description": "Genomics platform for managing, analyzing, and visualizing sequencing data. Includes CLI SDK, REST API, and MCP server for AI-assisted workflows.",
-  "folders": ["knowledge/output/site", "skills", "mcp-server/README.md"],
-  "excludeFolders": ["dev", "mcp-server/tests", "mcp-server/dist", "knowledge/src", "knowledge/tests"],
-  "excludeFiles": ["CHANGELOG.md", "LICENSE"],
-  "rules": [
-    "Use `import isabl_cli as ii` convention",
-    "Filter queries with Django-style syntax: status='SUCCEEDED', application__name='MUTECT'",
-    "Applications inherit from AbstractApplication",
-    "Data model hierarchy: Individual -> Sample -> Experiment -> Analysis",
-    "Analysis statuses: CREATED -> STAGED -> SUBMITTED -> STARTED -> SUCCEEDED / FAILED",
-    "Use system_id for experiments/individuals/samples, pk for analyses/projects/applications"
-  ]
+  "public_key": "pk_VetnAPbriqBHHwJURgAra"
 }

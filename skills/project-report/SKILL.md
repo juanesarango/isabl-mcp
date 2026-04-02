@@ -1,5 +1,5 @@
 ---
-name: isabl-project-report
+name: project-report
 description: Generate a status report for an Isabl project. Use when summarizing project progress, identifying issues, or preparing updates.
 tools: Read, Bash
 model: inherit

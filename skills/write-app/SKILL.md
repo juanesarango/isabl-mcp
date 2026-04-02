@@ -1,5 +1,5 @@
 ---
-name: isabl-write-app
+name: write-app
 description: Guide through creating a new Isabl bioinformatics application. Use when building pipelines that integrate with the Isabl platform.
 tools: Read, Write, Edit, Glob, Grep
 model: inherit

@@ -1,5 +1,5 @@
 ---
-name: isabl-monitor-analyses
+name: monitor-analyses
 description: Monitor and track the status of Isabl analyses. Use when checking job progress, finding failed analyses, or tracking pipeline execution.
 tools: Read, Bash
 model: inherit

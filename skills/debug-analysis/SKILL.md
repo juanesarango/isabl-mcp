@@ -1,5 +1,5 @@
 ---
-name: isabl-debug-analysis
+name: debug-analysis
 description: Systematically debug a failed Isabl analysis. Use when an analysis has FAILED status or unexpected behavior.
 tools: Read, Bash, Glob, Grep
 model: inherit

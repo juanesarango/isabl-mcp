@@ -227,14 +227,34 @@ class MyApplication(AbstractApplication):
 
 ## Step 8: Register in INSTALLED_APPLICATIONS
 
-Add the application to your settings:
+Add the application to the appropriate assembly apps module (e.g., `apps_grch38`):
 
 ```python
-# In your settings.py or apps configuration
 INSTALLED_APPLICATIONS = [
     "my_apps.MyApplication",
     "my_apps.MyPairApplication",
 ]
+```
+
+### Running the Application
+
+Applications are invoked via the assembly-specific CLI command:
+
+```bash
+# Dry run (no --commit)
+isabl apps-<assembly-name> <app-name>-<version> --targets EXPERIMENT_SYSTEM_ID
+
+# Paired tumor-normal
+isabl apps-<assembly-name> <app-name>-<version> --pairs TUMOR_SYSTEM_ID NORMAL_SYSTEM_ID
+
+# Actually submit
+isabl apps-<assembly-name> <app-name>-<version> --pairs TUMOR_SYSTEM_ID NORMAL_SYSTEM_ID --commit
+```
+
+For example, a GRCh38 app called `my_application` version `1.0.0`:
+
+```bash
+isabl apps-grch38 my-application-1.0.0 --pairs IID_H209923_T01_01_WG01 IID_H209923_N01_01_WG01 --commit
 ```
 
 ## Step 9: Write Tests

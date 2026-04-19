@@ -1,13 +1,14 @@
 # 🧬🤖 Isabl MCP Server
 
 [![CI](https://github.com/juanesarango/isabl-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/juanesarango/isabl-mcp/actions/workflows/ci.yml)
+[![Context7](https://img.shields.io/badge/Open%20in-Context7-green?style=flat-square)](https://context7.com/juanesarango/isabl-mcp)
 
 > [!IMPORTANT]
 > _Talk to your genomics data. MCP server + knowledge base for the [Isabl](https://docs.isabl.io) platform._
 
 > [!TIP]
-> 👋 New to Isabl? Isabl is **free to use** for Research and Academy. 🔐 **[Request Access Here](https://github.com/papaemmelab/isabl_cli/issues/new?title=Request%20Access%20to%20Isabl&body=%23%23%20User%20Information%0A-%20**GitHub%20Username%3A**%20%0A-%20**Institution%3A**%20%0A-%20**Use%20Purpose%3A**%20(Individual%20%2F%20Academic%2FResearch%20%2F%20Commercial))**
-> 📖 **[View Documentation](https://docs.isabl.io)**
+> 👋 New to Isabl? Isabl is **free to use** for Research and Academy. 🔐 [Request Access Here](https://github.com/papaemmelab/isabl_cli/issues/new?title=Request%20Access%20to%20Isabl&body=%23%23%20User%20Information%0A-%20**GitHub%20Username%3A**%20%0A-%20**Institution%3A**%20%0A-%20**Use%20Purpose%3A**%20(Individual%20%2F%20Academic%2FResearch%20%2F%20Commercial))
+> 📖 [View Documentation](https://docs.isabl.io)
 
 ## Install
 
@@ -61,6 +62,8 @@ pip install isabl-mcp # or install globally
 
 Works with any MCP-compatible client (Windsurf, Zed, Claude Desktop, etc.).
 
+> [!TIP]
+> You can use the Isabl MCP directly through <img src="https://upstash.gallerycdn.vsassets.io/extensions/upstash/context7-mcp/1.0.1/1754329920224/Microsoft.VisualStudio.Services.Icons.Default" height="16"> **[Context7](https://context7.com/juanesarango/isabl-mcp)**
 
 
 ## What's included

@@ -13,6 +13,7 @@ You are helping the user run multiple Isabl applications as a coordinated pipeli
 
 Work through these steps systematically:
 
+0. [ ] **Find Available Applications** (apps by assemblies)
 1. [ ] **Define pipeline steps** (apps and order)
 2. [ ] **Identify target experiments**
 3. [ ] **Check prerequisites** (dependencies, raw data)
@@ -20,6 +21,20 @@ Work through these steps systematically:
 5. [ ] **Submit pipeline** (commit to run)
 6. [ ] **Monitor execution**
 7. [ ] **Verify completion**
+
+
+## Setp 0: Find Avaiable Apps
+
+### Find Apps
+
+Find all apps per assembly on the format `isabl apps-<assembly> --help`
+
+```bash
+isabl --help
+
+# i.e 
+isabl apps-grch37 --help
+```
 
 ## Step 1: Define Pipeline Steps
 

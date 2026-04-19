@@ -4,6 +4,12 @@
 
 > Talk to your genomics data. MCP server + knowledge base for the [Isabl](https://docs.isabl.io) platform.
 
+> ### 👋 New to Isabl?
+> Isabl is **free to use** for Research and Academy.
+> 
+> 🔐 **[Request Access Here](https://github.com/papaemmelab/isabl_cli/issues/new?title=Request%20Access%20to%20Isabl&body=%23%23%20User%20Information%0A-%20**GitHub%20Username%3A**%20%0A-%20**Institution%3A**%20%0A-%20**Use%20Purpose%3A**%20(Individual%20%2F%20Academic%2FResearch%20%2F%20Commercial))**
+> 📖 **[View Documentation](https://docs.isabl.io)**
+
 ## Install
 
 ### <img src="https://cdn.simpleicons.org/claude" width="16" height="16"> Claude Code

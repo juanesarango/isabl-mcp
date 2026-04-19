@@ -2,17 +2,16 @@
 
 [![CI](https://github.com/juanesarango/isabl-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/juanesarango/isabl-mcp/actions/workflows/ci.yml)
 
-> Talk to your genomics data. MCP server + knowledge base for the [Isabl](https://docs.isabl.io) platform.
+> [!IMPORTANT]
+> _Talk to your genomics data. MCP server + knowledge base for the [Isabl](https://docs.isabl.io) platform._
 
-> ### 👋 New to Isabl?
-> Isabl is **free to use** for Research and Academy.
-> 
-> 🔐 **[Request Access Here](https://github.com/papaemmelab/isabl_cli/issues/new?title=Request%20Access%20to%20Isabl&body=%23%23%20User%20Information%0A-%20**GitHub%20Username%3A**%20%0A-%20**Institution%3A**%20%0A-%20**Use%20Purpose%3A**%20(Individual%20%2F%20Academic%2FResearch%20%2F%20Commercial))**
+> [!TIP]
+> 👋 New to Isabl? Isabl is **free to use** for Research and Academy. 🔐 **[Request Access Here](https://github.com/papaemmelab/isabl_cli/issues/new?title=Request%20Access%20to%20Isabl&body=%23%23%20User%20Information%0A-%20**GitHub%20Username%3A**%20%0A-%20**Institution%3A**%20%0A-%20**Use%20Purpose%3A**%20(Individual%20%2F%20Academic%2FResearch%20%2F%20Commercial))**
 > 📖 **[View Documentation](https://docs.isabl.io)**
 
 ## Install
 
-### <img src="https://cdn.simpleicons.org/claude" width="16" height="16"> Claude Code
+### ![Claude Logo](https://cdn.simpleicons.org/claude?size=18) Claude Code 
 
 ```text
 /plugin marketplace add juanesarango/isabl-mcp
@@ -21,7 +20,7 @@
 
 Installs the MCP server (11 tools) + 8 guided skills as `/isabl-*` slash commands (type `/isabl` to see all). Credentials are auto-discovered from `~/.isabl/settings.json`. For MCP only (no skills): `claude mcp add isabl -- uvx isabl-mcp`.
 
-### <img src="https://cdn.simpleicons.org/cursor" width="16" height="16"> Cursor
+### ![Cursos Logo](https://cdn.simpleicons.org/cursor?size=18) Cursor
 
 [![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name=isabl&config=eyJjb21tYW5kIjogInV2eCIsICJhcmdzIjogWyJpc2FibC1tY3AiXSwgImVudiI6IHsiSVNBQkxfQVBJX1VSTCI6ICJodHRwczovL3lvdXItaXNhYmwtaW5zdGFuY2UuY29tL2FwaS92MS8iLCAiSVNBQkxfQVBJX1RPS0VOIjogInlvdXItdG9rZW4taGVyZSJ9fQ%3D%3D)
 
@@ -42,7 +41,7 @@ Click the badge above, or add to `.cursor/mcp.json`:
 }
 ```
 
-### <img src="https://img.icons8.com/fluency/16/chatgpt.png" width="16" height="16"> Codex
+### ![Codex Logo](https://img.icons8.com/fluency/18/chatgpt.png) Codex 
 
 Add to `~/.codex/config.toml`:
 
@@ -53,7 +52,7 @@ args = ["isabl-mcp"]
 env = { "ISABL_API_URL" = "https://your-isabl-instance.com/api/v1/", "ISABL_API_TOKEN" = "your-token" }
 ```
 
-### Other MCP clients
+### ![MCP Logo](https://cdn.simpleicons.org/modelcontextprotocol?size=18) Other MCP clients
 
 ```bash
 uvx isabl-mcp        # run directly, no install needed
@@ -61,6 +60,8 @@ pip install isabl-mcp # or install globally
 ```
 
 Works with any MCP-compatible client (Windsurf, Zed, Claude Desktop, etc.).
+
+
 
 ## What's included
 

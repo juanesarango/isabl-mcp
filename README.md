@@ -1,6 +1,8 @@
 # 🧬🤖 Isabl MCP Server
 
 [![CI](https://github.com/juanesarango/isabl-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/juanesarango/isabl-mcp/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/isabl-mcp?style=flat-square)](https://pypi.org/project/isabl-mcp/)
+[![MCP](https://img.shields.io/badge/MCP-compatible-blue?style=flat-square)](https://modelcontextprotocol.io)
 [![Context7](https://img.shields.io/badge/Open%20in-Context7-green?style=flat-square)](https://context7.com/juanesarango/isabl-mcp)
 
 > [!IMPORTANT]

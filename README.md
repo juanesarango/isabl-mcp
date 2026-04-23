@@ -5,8 +5,7 @@
 [![MCP](https://img.shields.io/badge/MCP-compatible-blue?style=flat-square)](https://modelcontextprotocol.io)
 [![Context7](https://img.shields.io/badge/Open%20in-Context7-green?style=flat-square)](https://context7.com/juanesarango/isabl-mcp)
 
-> [!IMPORTANT]
-> _Talk to your genomics data. MCP server + knowledge base for the [Isabl](https://docs.isabl.io) platform._
+_Talk to your genomics data. MCP server + knowledge base for the [Isabl](https://docs.isabl.io) platform._
 
 > [!TIP]
 > 👋 New to Isabl? Isabl is **free to use** for Research and Academy. 🔐 [Request Access Here](https://github.com/papaemmelab/isabl_cli/issues/new?title=Request%20Access%20to%20Isabl&body=%23%23%20User%20Information%0A-%20**GitHub%20Username%3A**%20%0A-%20**Institution%3A**%20%0A-%20**Use%20Purpose%3A**%20(Individual%20%2F%20Academic%2FResearch%20%2F%20Commercial))
